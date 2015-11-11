@@ -25,9 +25,11 @@ Template.imagelist.helpers({
         var comment = Session.get("comment");
 
         var findObject = {};
+        var conditions = [];
 
         if(schoolClass !== "" && schoolClass !== undefined){
-            findObject.class = schoolClass;
+            //findObject.class = schoolClass;
+            conditions.push({"class": schoolClass});
         }
         if(rating !== "" && rating !== undefined){
             findObject.rating = parseInt(rating);
@@ -42,31 +44,46 @@ Template.imagelist.helpers({
         if(inputMisconnections > 0)findObject.misconnections = { $gt: parseInt(inputMisconnections) };
         if(comment === true)findObject.comment = {$ne:null};
 
+        //sensors
         if(Button === true) {
-            findObject = packSelectors("Button", findObject);
+            //findObject = packSelectors("Button", findObject);
+            conditions.push(getSensorConditions("Button"));
         }
 
         if(Color === true) {
-            findObject = packSelectors("Color", findObject);
+            //findObject = packSelectors("Button", findObject);
+            conditions.push(getSensorConditions("Color"));
         }
 
         if(IR === true) {
-            findObject = packSelectors("IR", findObject);
+            //findObject = packSelectors("Button", findObject);
+            conditions.push(getSensorConditions("IR"));
         }
 
         if(UltraSonic === true) {
-            findObject = packSelectors("UltraSonic", findObject);
+            //findObject = packSelectors("Button", findObject);
+            conditions.push(getSensorConditions("UltraSonic"));
         }
 
         if(Gyro === true) {
-            findObject = packSelectors("Gyro", findObject);
+            //findObject = packSelectors("Button", findObject);
+            conditions.push(getSensorConditions("Gyro"));
         }
+
+        findObject = conditions.length > 0 ? { $and: conditions} : {};
 
         Session.set("findObject", findObject);
 
         return Images.find(findObject, {limit:Session.get('itemsLimit')});
+       // {$or : [{name : "hej",}, {name: "dav"}]};
     }
 });
+
+var getSensorConditions = function(sensorName) {
+    return{
+        $or: [{"sensors.port1": sensorName}, {"sensors.port2": sensorName}, {"sensors.port3": sensorName}, {"sensors.port4": sensorName}]
+    };
+};
 
 var packSelectors = function(sensor, findObject) {
         var findObject1 = jQuery.extend({},findObject);
