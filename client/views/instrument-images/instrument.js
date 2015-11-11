@@ -1,11 +1,6 @@
 var localhost = false;
-var imageServer;
+var imageServer = Meteor.settings.public.imagesUrl || "http://127.0.0.1:8080/";
 
-if (!localhost) {
-    imageServer = "http://10.192.112.71:8080/";
-} else {
-    imageServer = "http://127.0.0.1:8080/";
-}
 
 Template.instrument.events({
     "change #inputClass": function () {
