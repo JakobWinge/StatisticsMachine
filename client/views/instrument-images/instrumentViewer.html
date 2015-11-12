@@ -1,79 +1,57 @@
 <template name="instrumentViewer">
-    <div class="col-sm-12 description">
-        <h3><span class="photo-time"><a href="{{pathFor route='analyzer' _id= _id}}"><i class="fa fa-pencil-square"></i></a></span></h3>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Class</label>
 
-                <div class="col-sm-8">
-                    <p class="form-control-static">{{class}}</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword" class="col-sm-4 control-label">Rating</label>
+    <div class="header clearfix">
+        <h4>{{baseName}}</h4>
+        <div class="action-buttons">
+            <a class="btn btn-default" href="{{originalImagePath path}}"  data-lightbox="instrument"><i class="fa fa-expand"></i></a>
+            <a class="btn btn-info" href="{{pathFor route='analyzer' _id= _id}}"><i class="fa fa-pencil"></i></a>
+        </div>
+    </div>
 
-                <div class="col-sm-8">
-                    <p class="form-control-static">{{rating}}</p>
-                </div>
-            </div>
-            <div class="row">
-                <label class="col-sm-4 control-label">Sensors</label>
+    <div class="col-sm-12">
 
-                <div class="col-sm-8 sensor-selectors">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputSensorPort1">Port 1:</label>
+        <div class="form-group">
 
-                            <p>{{sensors.port1}}</p>
-                        </div>
-                    </div>
+            <label class="label-container">Class:</label>
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputSensorPort2">Port 2:</label>
+            <p class="value-container">{{class}}</p>
 
-                            <p>{{sensors.port2}}</p>
-                        </div>
-                    </div>
+        </div>
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputSensorPort3">Port 3:</label>
+        <div class="form-group">
 
-                            <p>{{sensors.port3}}</p>
-                        </div>
-                    </div>
+            <label class="label-container">Rating:</label>
 
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputSensorPort4">Port 4:</label>
+            <p class="value-container">{{rating}}</p>
 
-                            <p>{{sensors.port4}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Mis-connections:</label>
+        </div>
 
-                <div class="col-sm-8">
-                    <p class="form-control-static">{{misconnections}}</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Sound Selector:</label>
+        <div class="form-group">
 
-                <div class="col-sm-8">
-                    <p class="form-control-static">{{soundselector}}</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Comment</label>
+            <label class="label-container">Mis-connections:</label>
 
-                <div class="col-sm-8">
-                    <p class="form-control-static">{{comment}}</p>
-                </div>
-            </div>
-        </form>
+            <p class="value-container">{{misconnections}}</p>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="label-container">Comment:</label>
+
+            <p class="value-container">{{comment}} {{soundselector}}</p>
+
+        </div>
+
+
+    </div>
+
+    <div class="port-overview">
+
+        <span class="port-indicator {{sensors.port1}}"></span>
+        <span class="port-indicator {{sensors.port2}}"></span>
+        <span class="port-indicator {{sensors.port3}}"></span>
+        <span class="port-indicator {{sensors.port4}}"></span>
+
+        <span class="port-indicator sound-selector {{ternary soundselector 'active' ''}}"></span>
     </div>
 </template>
