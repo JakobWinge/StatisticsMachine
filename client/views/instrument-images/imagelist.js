@@ -30,43 +30,65 @@ Template.imagelist.helpers({
         if(schoolClass !== "" && schoolClass !== undefined){
             //findObject.class = schoolClass;
             conditions.push({"class": schoolClass});
+            resetInfiniteScroll();
         }
         if(rating !== "" && rating !== undefined){
-            findObject.rating = parseInt(rating);
+            conditions.push({'rating' : parseInt(rating)});
+            resetInfiniteScroll();
         }
-        if(p1) findObject['sensors.port1'] = {$nin:[null, ""]};
-        if(p2) findObject['sensors.port2'] = {$nin:[null, ""]};
-        if(p3) findObject['sensors.port3'] = {$nin:[null, ""]};
-        if(p4) findObject['sensors.port4'] = {$nin:[null, ""]};
+        if(p1){
+            conditions.push({'sensors.port1' : {$nin:[null, ""]}});
+            resetInfiniteScroll();
+        }
+        if(p2){
+            conditions.push({'sensors.port2' : {$nin:[null, ""]}});
+            resetInfiniteScroll();
+        }
+        if(p3){
+            conditions.push({'sensors.port3' : {$nin:[null, ""]}});
+            resetInfiniteScroll();
+        }
+        if(p4){
+            conditions.push({'sensors.port4' : {$nin:[null, ""]}});
+            resetInfiniteScroll();
+        }
 
-        if(soundselector === true)findObject.soundselector = true;
-        console.log(inputMisconnections);
-        if(inputMisconnections > 0)findObject.misconnections = { $gt: parseInt(inputMisconnections) };
-        if(comment === true)findObject.comment = {$ne:null};
+        if(soundselector === true){
+            resetInfiniteScroll();
+            conditions.push({'soundselector' : true});
+        }
+        if(inputMisconnections > 0){
+            resetInfiniteScroll();
+            conditions.push({'misconnections' : { $gt: parseInt(inputMisconnections)}});
+        }
+        if(comment === true){
+            resetInfiniteScroll();
+            conditions.push({'comment' : {$ne:null}});
+        }
 
         //sensors
         if(Button === true) {
-            //findObject = packSelectors("Button", findObject);
+            resetInfiniteScroll();
             conditions.push(getSensorConditions("Button"));
         }
 
         if(Color === true) {
-            //findObject = packSelectors("Button", findObject);
+            resetInfiniteScroll();
             conditions.push(getSensorConditions("Color"));
         }
 
         if(IR === true) {
-            //findObject = packSelectors("Button", findObject);
+            resetInfiniteScroll();
             conditions.push(getSensorConditions("IR"));
         }
 
         if(UltraSonic === true) {
-            //findObject = packSelectors("Button", findObject);
+            resetInfiniteScroll();
             conditions.push(getSensorConditions("UltraSonic"));
         }
 
         if(Gyro === true) {
-            //findObject = packSelectors("Button", findObject);
+            resetInfiniteScroll();
             conditions.push(getSensorConditions("Gyro"));
         }
 
@@ -122,3 +144,7 @@ function showMoreVisible() {
 
 // run the above func every time the user scrolls
 $(window).scroll(showMoreVisible);
+
+function resetInfiniteScroll() {
+    Session.set('itemsLimit', ITEMS_INCREMENT);
+}

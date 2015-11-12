@@ -34,9 +34,18 @@ Router.route('/pictures', {
     name: 'pictures',
     template: 'pictures'
 });
-Router.route('/analyzer', {
+Router.route('/analyzer/:_id', {
     name: "analyzer",
-    template: "analyzer"
+    template: "analyzer",
+    data: function() {
+        var findObject;
+        if(this.params._id !== "default") {
+            console.log(Images.findOne({ _id: this.params._id }));
+            return Images.findOne({ _id: this.params._id });
+        }
+        console.log( Images.findOne({}));
+        return Images.findOne({});
+    }
 });
 Router.route('/statistics', {
     name: "statistics",
