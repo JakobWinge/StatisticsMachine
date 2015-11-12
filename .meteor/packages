@@ -26,3 +26,5 @@ kidovate:bootstrap-slider
 accounts-ui
 accounts-password
 fortawesome:fontawesome
+ajduke:bootstrap-tokenfield
+sergeyt:typeahead
