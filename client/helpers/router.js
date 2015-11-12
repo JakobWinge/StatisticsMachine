@@ -38,7 +38,7 @@ Router.route('/picture-images', {
     name: 'picture-images',
     template: 'picture-images',
     onBeforeAction: function () {
-        Session.set("itemsLimitPictures", Meteor.settings.public.infiniteLength);
+        Session.set("itemsLimit", Meteor.settings.public.infiniteLength);
         this.next();
     }
 });
@@ -47,12 +47,16 @@ Router.route('/analyzer/:_id', {
     template: "analyzer",
     onBeforeAction: function () {
         if(this.params._id !== "default") {
+            console.log("onBefore is not default", this.params._id);
             var returnObject = Images.findOne({ _id: this.params._id });
             Session.set("state", returnObject.state);
             this.next();
+        } else {
+            console.log("onBefore is default!", this.params._id);
+            Session.set("state", "");
+            this.next();
         }
-        Session.set("state", "");
-        this.next();
+
     },
     data: function() {
         if(this.params._id !== "default") {
@@ -67,5 +71,9 @@ Router.route('/statistics', {
 });
 
 Router.configure({
-    layoutTemplate: 'main'
+    layoutTemplate: 'main',
+    onBeforeAction: function() {
+        window.scrollTo(0, 0);
+        this.next();
+    }
 });
