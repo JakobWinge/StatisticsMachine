@@ -1,5 +1,6 @@
 var imageServer = Meteor.settings.public.imagesUrl || "http://127.0.0.1:8080/";
 
+
 Template.analyzer.helpers({
 
     original: function () {
@@ -10,30 +11,39 @@ Template.analyzer.helpers({
         return imageServer + "resized/";
     },
 
-    instrument: function() {
-return Session.get("state");
+    instrument: function () {
+        return Session.get("state");
     }
 });
 Template.analyzer.events({
-    "click .cb-enable": function () {
-        console.log("clicked!", event.target);
-        $(event.target).parent().addClass("selected");
-        var fieldswitch = $(event.target).parents('.switch');
-        console.log("switch: ", fieldswitch);
-        var disabled = $(fieldswitch).children('.cb-disable');
-        console.log(disabled);
-        $(disabled).removeClass('selected');
-        Session.set("state", "instrument");
-    },
 
-    "click .cb-disable": function () {
-        console.log("clicked!", event.target);
-        $(event.target).parent().addClass("selected");
-        var fieldswitch = $(event.target).parents('.switch');
-        console.log("switch: ", fieldswitch);
-        var disabled = $(fieldswitch).children('.cb-enable');
-        console.log(disabled);
-        $(disabled).removeClass('selected');
+    "click #instrumentState": function () {
+        $(event.target).addClass("active");
+        $(event.target).parent().children('pictureState').removeClass("active");
+        Session.set("state", "instrument");
+        $('#remember').hide(500);
+    },
+    "click #pictureState": function () {
+        $(event.target).addClass("active");
+        $(event.target).parent().children('instrumentState').removeClass("active");
         Session.set("state", "picture");
+        $('#remember').hide(500);
+    },
+    "click #saveState": function () {
+        if (Session.get("state") === "instrument" || Session.get("state") === "picture") {
+
+
+            Images.update(this._id, {
+                $set: {'state': Session.get("state")}
+            });
+            $('#remember').hide(500);
+            Session.set('state', "");
+        } else {
+            $('#remember').show(500);
+        }
     }
+});
+
+Template.analyzer.onRendered(function () {
+    $('#remember').hide();
 });
