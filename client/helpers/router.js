@@ -38,23 +38,30 @@ Router.route('/picture-images', {
     name: 'picture-images',
     template: 'picture-images',
     onBeforeAction: function () {
-        Session.set("itemsLimitPictures", Meteor.settings.public.infiniteLength);
+        Session.set("itemsLimit", Meteor.settings.public.infiniteLength);
         this.next();
     }
 });
 Router.route('/analyzer/:_id', {
     name: "analyzer",
     template: "analyzer",
-    data: function() {
-        var findObject;
+    onBeforeAction: function () {
         if(this.params._id !== "default") {
-            console.log(Images.findOne({ _id: this.params._id }));
+            console.log("onBefore is not default", this.params._id);
             var returnObject = Images.findOne({ _id: this.params._id });
             Session.set("state", returnObject.state);
-            console.log(Session.get("state"));
-            return returnObject;
+            this.next();
+        } else {
+            console.log("onBefore is default!", this.params._id);
+            Session.set("state", "");
+            this.next();
         }
-        console.log( Images.findOne({'state' : {$nin:["instrument", "picture"]}}));
+
+    },
+    data: function() {
+        if(this.params._id !== "default") {
+            return Images.findOne({ _id: this.params._id });
+        }
         return Images.findOne(Images.findOne({'state' : {$nin:["instrument", "picture"]}}));
     }
 });
@@ -64,5 +71,9 @@ Router.route('/statistics', {
 });
 
 Router.configure({
-    layoutTemplate: 'main'
+    layoutTemplate: 'main',
+    onBeforeAction: function() {
+        window.scrollTo(0, 0);
+        this.next();
+    }
 });

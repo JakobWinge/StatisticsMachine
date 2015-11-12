@@ -9,8 +9,8 @@
     <div class="col-sm-12 jumbotron">
         <div class="col-sm-offset-4 col-sm-4">
             <ul class="nav nav-pills nav-justified">
-                <li role="presentation" id="instrumentState"><a href="#">Instrument</a></li>
-                <li role="presentation" id="pictureState"><a href="#">Picture / Video</a></li>
+                <li role="presentation" id="instrumentState" class="{{getState "instrument"}}"><a href="#">Instrument</a></li>
+                <li role="presentation" id="pictureState" class="{{getState "picture"}}"><a href="#">Picture / Video</a></li>
             </ul>
         </div>
 
@@ -25,18 +25,16 @@
 
     </div>
 
-    <div class="col-sm-12">
+    {{#if isStateSet}}
+
+
+    <div class="col-sm-12 jumbotron">
         <nav>
             <ul class="pager">
-                <button type="button" class="btn btn-default" id="saveState">Save</button>
+                <button type="button" class="btn btn-primary pull-right" id="saveState"><i class="fa fa-floppy-o"></i> Save</button>
                 <br/>
-
-                <div class="col-sm-offset-2 col-sm-8">
-                    <div class="alert alert-danger" id="remember" role="alert">Remember to choose instrument or
-                        picture!
-                    </div>
-                </div>
             </ul>
         </nav>
     </div>
+    {{/if}}
 </template>

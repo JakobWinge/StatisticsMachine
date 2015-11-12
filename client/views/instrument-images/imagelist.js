@@ -123,12 +123,11 @@ var packSelectors = function (sensor, findObject) {
 };
 
 function showMoreVisible() {
-    if (Router.current().route.getName() === 'instrument-images') {
         var threshold, target = $("#showMoreResults");
         if (!target.length) {
             return;
         }
-        ;
+
 
         threshold = $(window).scrollTop() + $(window).height() - target.height() + 150;
 
@@ -145,7 +144,6 @@ function showMoreVisible() {
                 target.data("visible", false);
             }
         }
-    }
 }
 
 // run the above func every time the user scrolls

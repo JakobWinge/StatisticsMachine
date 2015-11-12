@@ -12,7 +12,31 @@ Template.analyzer.helpers({
     },
 
     instrument: function () {
+        console.log("is state set?" , Session.get("state"));
         return Session.get("state");
+    },
+    isStateSet : function() {
+        console.log("route", Router.current().params._id);
+        if(Router.current().params._id !== "default") {
+            return false
+        }
+        if(Session.get("state") === "instrument" || Session.get("state") === "picture") {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    getState : function(type) {
+        console.log("stateobject", this);
+        if(Router.current().params._id === "default") {
+            if (type === Session.get("state")) {
+                return "active"
+            }
+        } else{
+            if (type === this.state) {
+                return "active"
+            }
+        }
     }
 });
 Template.analyzer.events({
@@ -21,29 +45,31 @@ Template.analyzer.events({
         $(event.target).addClass("active");
         $(event.target).parent().children('pictureState').removeClass("active");
         Session.set("state", "instrument");
-        $('#remember').hide(500);
+        setState(this,  "instrument");
     },
     "click #pictureState": function () {
         $(event.target).addClass("active");
         $(event.target).parent().children('instrumentState').removeClass("active");
         Session.set("state", "picture");
-        $('#remember').hide(500);
+        setState(this, "picture");
     },
     "click #saveState": function () {
+        console.log("state", Session.get("state"));
         if (Session.get("state") === "instrument" || Session.get("state") === "picture") {
-
-
             Images.update(this._id, {
                 $set: {'state': Session.get("state")}
             });
-            $('#remember').hide(500);
-            Session.set('state', "");
-        } else {
-            $('#remember').show(500);
+            Session.set("state", "");
         }
+        window.scrollTo(0, 0);
     }
 });
 
-Template.analyzer.onRendered(function () {
-    $('#remember').hide();
-});
+var setState = function(self, type) {
+    if(Router.current().params._id !== "default") {
+        console.log("Not default!");
+        Images.update(self._id, {
+            $set: {'state': type}
+        });
+    }
+}
