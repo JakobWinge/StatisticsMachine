@@ -1,0 +1,10 @@
+<template name="picturelist">
+    {{#each pictures}}
+        {{> picture}}
+    {{/each}}
+    {{#if moreResults}}
+        <div id="showMoreResultsPictures" style="margin-left: 25px;">
+            <span align="center"><h1><i class="fa fa-circle-o-notch fa-spin"></i> Loading...<br/></h1></span>
+        </div>
+    {{/if}}
+</template>

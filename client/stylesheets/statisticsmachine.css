@@ -110,11 +110,6 @@ h3 .photo-time {
     float:right;
 }
 
-.control-label, .instrument-card label {
-    font-weight: normal;
-    text-transform: uppercase;
-}
-
 .slider.slider-horizontal {
     width:100%;
     margin-top: 0.8em;
