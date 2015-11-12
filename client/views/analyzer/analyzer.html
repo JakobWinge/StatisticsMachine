@@ -1,8 +1,36 @@
 <template name="analyzer">
-    <div class="analyzer-container well">
-        <div class="col-sm-6">
-            <a href="{{original}}{{path}}" target="_blank" class="instrument-image"
+    <div class="analyzer-container col-sm-12 jumbotron">
+        <div class="center-block">
+            <a href="{{original}}{{path}}" target="_blank" class="analyzer-image"
                style="background-image:url('{{resized}}{{path}}');"></a>
         </div>
+    </div>
+
+
+    <p class="field switch">
+        <input type="radio" id="radio1" name="field" checked/>
+        <input type="radio" id="radio2" name="field"/>
+        <label for="radio1" class="cb-enable"><span>Instrument</span></label>
+        <label for="radio2" class="cb-disable"><span>Picture / Video</span></label>
+    </p>
+
+    <div class="col-sm-12 jumbotron">
+        {{#if equals instrument 'instrument'}}
+            {{>instrumentChanger}}
+        {{/if}}
+        {{#if equals instrument 'picture'}}
+            <p>
+
+            <h1>picture</h1></p>
+        {{/if}}
+    </div>
+
+    <div class="col-sm-12">
+        <nav>
+            <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </nav>
     </div>
 </template>

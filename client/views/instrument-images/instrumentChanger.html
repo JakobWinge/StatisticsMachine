@@ -1,0 +1,116 @@
+<template name="instrumentChanger">
+    <div class="col-sm-12 description">
+        <h3>{{baseName}} <span class="photo-time">{{dateTime}}</span></h3>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputClass" class="col-sm-3 control-label">Class</label>
+
+                <div class="col-sm-9">
+                    <select id="inputClass" class="form-control">
+                        <option value="" {{inputClassChecked ../class}}></option>
+                        {{#each schoolClasses}}
+                            <option value="{{value}}" {{inputClassChecked ../class}}>{{value}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputRating" class="col-sm-3 control-label">Rating</label>
+
+                <div class="col-sm-9">
+                    <input id="inputRating" class="rating-slider" data-slider-id='inputRatingSlider' type="text"
+                           data-slider-min="0" data-slider-max="5" data-slider-step="1"
+                           data-slider-value="{{rating}}"/>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 control-label">Sensors</label>
+
+                <div class="col-sm-9 sensor-selectors">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="inputSensorPort1">Port 1:</label>
+                            <select id="inputSensorPort1" class="form-control">
+                                <option value="" {{portChecked ../sensors.port1}}></option>
+                                {{#each sensors}}
+                                    <option value="{{value}}" {{portChecked ../sensors.port1}}>{{value}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="inputSensorPort2">Port 2:</label>
+                            <select id="inputSensorPort2" class="form-control">
+                                <option value="" {{portChecked ../sensors.port2}}></option>
+                                {{#each sensors}}
+                                    <option value="{{value}}" {{portChecked ../sensors.port2}}>{{value}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="inputSensorPort3">Port 3:</label>
+                            <select id="inputSensorPort3" class="form-control">
+                                <option value="" {{portChecked ../sensors.port3}}></option>
+                                {{#each sensors}}
+                                    <option value="{{value}}" {{portChecked ../sensors.port3}}>{{value}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="inputSensorPort4">Port 4:</label>
+                            <select id="inputSensorPort4" class="form-control">
+                                <option value="" {{portChecked ../sensors.port4}}></option>
+                                {{#each sensors}}
+                                    <option value="{{value}}" {{portChecked ../sensors.port4}}>{{value}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-9">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" {{soundSelectorChecked soundselector}} id="soundSelector"> Sound selector
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group mis-connections">
+                            <input type="number" class="form-control small-number-input"
+                                   id="inputMisconnections" value="{{misconnections}}">
+                            <label for="inputMisconnections">Mis-connections</label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="inputComment" class="col-sm-3 control-label">Comment</label>
+
+                <div class="col-sm-9">
+                            <textarea id="inputComment" class="form-control" rows="2"
+                                      placeholder="Write a comment or description...">{{comment}}</textarea>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</template>

@@ -102,51 +102,47 @@ body {
     border:1px solid #909090;
 }
 
-.instrument-card h3 {
+h3 {
     margin-top: 0;
 }
-.instrument-card h3 .photo-time {
+h3 .photo-time {
     font-size:0.5em;
     float:right;
 }
 
-.instrument-card .control-label, .instrument-card label {
+.control-label, .instrument-card label {
     font-weight: normal;
     text-transform: uppercase;
 }
 
-.instrument-card .slider.slider-horizontal {
+.slider.slider-horizontal {
     width:100%;
     margin-top: 0.8em;
 }
 
-.instrument-card .slider.slider-horizontal .slider-selection {
+.slider.slider-horizontal .slider-selection {
     background: #eb6864;
 }
-.instrument-card .slider.slider-horizontal .slider-handle {
+.slider.slider-horizontal .slider-handle {
     background: #393a35;
 }
-.instrument-card .sensor-selectors {
+.sensor-selectors {
     padding-top:11px;
 }
-.instrument-card .sensor-selectors .form-group {
+.sensor-selectors .form-group {
     margin-bottom: 0;
 }
-.instrument-card .sensor-selectors select.form-control {
+.sensor-selectors select.form-control {
     padding:5px 10px;
     width: 90%;
     height:35px;
 }
-.instrument-card .mis-connections {
+.mis-connections {
     margin-top:4px;
 }
-.instrument-card .small-number-input {
+.small-number-input {
     padding:5px;
     height:35px;
     width:40px;
     display: inline-block;
-}
-
-.analyzer-container {
-
 }
