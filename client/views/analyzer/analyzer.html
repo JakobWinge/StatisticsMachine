@@ -9,8 +9,8 @@
     <div class="col-sm-12 jumbotron">
         <div class="col-sm-offset-4 col-sm-4">
             <ul class="nav nav-pills nav-justified">
-                <li role="presentation" id="instrumentState"><a href="#">Instrument</a></li>
-                <li role="presentation" id="pictureState"><a href="#">Picture / Video</a></li>
+                <li role="presentation" id="instrumentState" class="{{setState "instrument"}}"><a href="#">Instrument</a></li>
+                <li role="presentation" id="pictureState" class="{{setState "picture"}}"><a href="#">Picture / Video</a></li>
             </ul>
         </div>
 
@@ -24,6 +24,9 @@
         {{/if}}
 
     </div>
+
+    {{#if isDefault}}
+
 
     <div class="col-sm-12">
         <nav>
@@ -39,4 +42,5 @@
             </ul>
         </nav>
     </div>
+    {{/if}}
 </template>

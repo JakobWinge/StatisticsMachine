@@ -45,16 +45,19 @@ Router.route('/picture-images', {
 Router.route('/analyzer/:_id', {
     name: "analyzer",
     template: "analyzer",
-    data: function() {
-        var findObject;
+    onBeforeAction: function () {
         if(this.params._id !== "default") {
-            console.log(Images.findOne({ _id: this.params._id }));
             var returnObject = Images.findOne({ _id: this.params._id });
             Session.set("state", returnObject.state);
-            console.log(Session.get("state"));
-            return returnObject;
+            this.next();
         }
-        console.log( Images.findOne({'state' : {$nin:["instrument", "picture"]}}));
+        Session.set("state", "");
+        this.next();
+    },
+    data: function() {
+        if(this.params._id !== "default") {
+            return Images.findOne({ _id: this.params._id });
+        }
         return Images.findOne(Images.findOne({'state' : {$nin:["instrument", "picture"]}}));
     }
 });
