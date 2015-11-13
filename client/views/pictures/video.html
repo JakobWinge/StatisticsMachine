@@ -1,0 +1,13 @@
+<template name="video">
+    <div class="instrument-card well" id="{{_id}}">
+
+        <video loop controls id="bgvid" class="video-card">
+            <source src="video-test.mp4" type="video/mp4">
+        </video>
+
+        <div class="instrument-details">
+            {{>pictureViewer}}
+        </div>
+
+    </div>
+</template>

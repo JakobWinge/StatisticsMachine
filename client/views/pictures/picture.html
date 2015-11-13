@@ -1,13 +1,8 @@
 <template name="picture">
-    <div class="instrument-card well" id="{{_id}}">
-        <div class="row">
-            <div class="col-sm-6">
-                <a href="{{original}}{{path}}" target="_blank" class="instrument-image"
-                   style="background-image:url('{{resized}}{{path}}');"></a>
-            </div>
-            <div class="col-sm-6 description">
-                {{> pictureViewer}}
-            </div>
+    <div class="instrument-card well" id="{{_id}}" style="background-image:url('{{resizedImagePath path}}');">
+
+        <div class="instrument-details">
+            {{>pictureViewer}}
         </div>
 
     </div>

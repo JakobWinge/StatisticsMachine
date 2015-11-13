@@ -67,3 +67,27 @@
 .tt-suggestion p {
     margin: 0;
 }
+
+
+.tokenfield {
+    height:auto;
+    background-color: rgba(255,255,255,0.2);
+    border:2px dashed #777;
+    padding-bottom: 0px;
+}
+.tokenfield .token-input {
+    height:26px;
+}
+.tokenfield .token {
+    padding: 0 5px;
+    color:#F5F5F5;
+    background-color: #336699;
+    border-color:#336699;
+    height:auto;
+}
+.tokenfield .token:hover {
+    border-color: #243155;
+}
+::-webkit-input-placeholder {
+    color:    #666;
+}
