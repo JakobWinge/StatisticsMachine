@@ -12,11 +12,9 @@ Template.analyzer.helpers({
     },
 
     instrument: function () {
-        console.log("is state set?" , Session.get("state"));
         return Session.get("state");
     },
     isStateSet : function() {
-        console.log("route", Router.current().params._id);
         if(Router.current().params._id !== "default") {
             return false
         }
@@ -27,7 +25,6 @@ Template.analyzer.helpers({
         }
     },
     getState : function(type) {
-        console.log("stateobject", this);
         if(Router.current().params._id === "default") {
             if (type === Session.get("state")) {
                 return "active"
@@ -54,12 +51,29 @@ Template.analyzer.events({
         setState(this, "picture");
     },
     "click #saveState": function () {
-        console.log("state", Session.get("state"));
         if (Session.get("state") === "instrument" || Session.get("state") === "picture") {
+            if(Session.get("state") === "picture" && Session.get("instrumentForRef") !== "") {
+                console.log("inside!");
+                var record = Images.findOne({_id : this._id});
+                if (record.ref.constructor !== Array) {
+                    var ref = [];
+                    ref.push(Session.get("instrumentForRef"));
+                    Images.update(this._id, {
+                        $set: {'ref': ref}
+                    });
+                } else {
+                    var record = Images.findOne({_id : this._id}).ref;
+                    record.push(Session.get("instrumentForRef"));
+                    Images.update(this._id, {
+                        $set: {'ref': record}
+                    });
+                }
+            }
             Images.update(this._id, {
                 $set: {'state': Session.get("state")}
             });
             Session.set("state", "");
+            Session.set("instrumentForRef", "");
         }
         window.scrollTo(0, 0);
     }
@@ -67,7 +81,6 @@ Template.analyzer.events({
 
 var setState = function(self, type) {
     if(Router.current().params._id !== "default") {
-        console.log("Not default!");
         Images.update(self._id, {
             $set: {'state': type}
         });

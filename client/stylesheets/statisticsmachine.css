@@ -141,3 +141,7 @@ h3 .photo-time {
     width:40px;
     display: inline-block;
 }
+
+.login-link-text {
+    color: #ffffff;
+}
