@@ -1,7 +1,10 @@
 Template.tagInput.onRendered(function() {
-    var self = this;
+    var self = this,
+        elem = $(this.find('.tags-input'));
 
-    $(this.find('.tags-input')).tokenfield({
+//console.log("On tag input rendered", elem);
+
+    elem.tokenfield({
         typeahead: [null, {
             name: 'tags',
             displayKey: 'value',
@@ -25,6 +28,7 @@ Template.tagInput.onRendered(function() {
         var tags = tagObjects.map(function(tag) {
             return tag.value;
         });
+        console.log("Save tags to item", tags, self.data._id);
         Images.update(self.data._id, {
             $set: {tags: tags}
         });
@@ -32,13 +36,14 @@ Template.tagInput.onRendered(function() {
     }
 
     // Avoid duplicates
-    $(this.find('.tags-input')).on('tokenfield:createtoken', function (event) {
+    elem.on('tokenfield:createtoken', function (event) {
+        console.log("Createtoken", self.data);
         if (self.data.tags && self.data.tags.indexOf(event.attrs.value) > -1) {
             event.preventDefault();
         }
     });
 
-    $(this.find('.tags-input')).on('tokenfield:createdtoken', function (event) {
+    elem.on('tokenfield:createdtoken', function (event) {
         //console.log("Add token", event);
         // Add tags to index if no _id
         if (ImageTags.find({value: event.attrs.value}).count() <= 0) {
@@ -52,7 +57,7 @@ Template.tagInput.onRendered(function() {
         saveTags($(this).tokenfield('getTokens'));
     });
 
-    $(this.find('.tags-input')).on('tokenfield:removedtoken', function (event) {
+    elem.on('tokenfield:removedtoken', function (event) {
         //console.log("Removed token", event);
 
         // Add tag to instrument

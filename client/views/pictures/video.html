@@ -1,9 +1,9 @@
-<template name="picture">
+<template name="video">
     <div class="instrument-card well" id="{{_id}}">
 
-        <div class="img-container">
-            <img src="{{resizedImagePath path}}" alt=""/>
-        </div>
+        <video loop controls id="bgvid" class="video-card">
+            <source src="video-test.mp4" type="video/mp4">
+        </video>
 
         <div class="instrument-details">
             {{>pictureViewer}}
