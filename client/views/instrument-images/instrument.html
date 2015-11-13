@@ -1,6 +1,10 @@
 <template name="instrument">
     <!-- BEGIN INSTRUMENT -->
-    <div class="instrument-card well" id="{{_id}}" style="background-image:url('{{resizedImagePath path}}');">
+    <div class="instrument-card well" id="{{_id}}">
+
+        <div class="img-container">
+            <img src="{{resizedImagePath path}}" alt=""/>
+        </div>
 
         <div class="instrument-details">
             {{>instrumentViewer}}

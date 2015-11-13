@@ -85,18 +85,27 @@ body {
 .instrument-card {
     background-color: #fff;
     border-radius: 0px;
-    min-height: 400px;
+    height: 400px;
     padding: 0px;
     margin-bottom: 40px;
 
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
     position:relative;
     overflow:hidden;
     box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.39);
     border: 1px solid #dddddd;
+}
+.instrument-card .img-container {
+    width:70%;
+    height:100%;
+    overflow: hidden;
+    position:relative;
+}
+.instrument-card .img-container img {
+    width:100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .instrument-card .action-buttons {
     float:right;
@@ -107,7 +116,7 @@ body {
     right: 0;
     bottom: 0;
     width:30%;
-    background: rgba(255,255,255,0.5);
+    background: #FFF;
 
     color:#000;
     padding:0;
@@ -115,7 +124,6 @@ body {
 }
 .instrument-details .header {
     padding:10px;
-    background:rgba(255,255,255,0.5);
     font-weight: bold;
     border-bottom: 1px solid #ddd;
     margin-bottom:10px;
