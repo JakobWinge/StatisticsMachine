@@ -1,1 +1,35 @@
-<template name="filterPicture">Filter</template>
+<template name="filterPicture">
+
+        <div class="filter well">
+            <div class="filter-icon danger"><span class="glyphicon glyphicon-filter"></span></div>
+            <div class="filter-form">
+                <form class="form-inline">
+                    <div class="form-group form-group-sm">
+                        <label for="filterInputClass" class="control-label">Class</label>
+
+                        <select id="filterInputClass" name="filterInputClass" class="form-control">
+                            <option value="" {{filterClassChecked}}>ALL</option>
+                            {{#each schoolClasses}}
+                            <option value="{{value}}" {{filterClassChecked}}>{{value}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="form-group form-group-sm">
+                        <label class="control-label">Tags</label>
+
+                        <input type="text" placeholder="Enter tags..." class="form-control tags-input" id="inputTags" value="{{filterTags}}"/>
+                    </div>
+
+                    <div class="form-group form-group-sm">
+
+                        <label for="filterComment" class="control-label">Comment</label>
+
+                        <input type="text" placeholder="Search comments..." class="form-control" id="filterComment" value="{{filterComment}}"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+</template>

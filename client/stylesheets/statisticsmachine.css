@@ -156,6 +156,9 @@ body {
     font-size:1.5em;
 
 }
+.instrument-details .value-container.comment {
+    font-size:1em;
+}
 .instrument-details .value-container:empty:after {
     content:'n/a'
 }
@@ -243,4 +246,8 @@ h3 .photo-time {
     height:35px;
     width:40px;
     display: inline-block;
+}
+
+.filter .tokenfield {
+    min-width:200px;
 }

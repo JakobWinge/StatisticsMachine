@@ -78,6 +78,9 @@
 .tokenfield .token-input {
     height:26px;
 }
+.form-group-sm .tokenfield .token-input {
+    height:21px;
+}
 .tokenfield .token {
     padding: 0 5px;
     color:#F5F5F5;

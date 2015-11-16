@@ -4,6 +4,14 @@ Template.filter.helpers({
     },
     sensors: function () {
         return Sensors.find({});
+    },
+    filterComment: function() {
+        return Session.get("instrumentFilterComment");
+    },
+    filterClassChecked: function () {
+        if ((!this.value && !Session.get('filterInputClass')) || this.value === Session.get('filterInputClass')) {
+            return "selected";
+        }
     }
 
 });
@@ -49,8 +57,8 @@ Template.filter.events(
         "change #inputMisconnections": function (event) {
             Session.set("inputMisconnections", event.target.value);
         },
-        "change #comment": function (event) {
-            Session.set("comment", event.target.checked);
+        "change #filterComment": function (event) {
+            Session.set("instrumentFilterComment", event.target.value);
         }
     }
 );
