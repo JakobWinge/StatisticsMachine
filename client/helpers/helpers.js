@@ -5,7 +5,6 @@ Template.registerHelper('ternary', function (condition, ifTrue, ifFalse) {
     return condition ? ifTrue : ifFalse;
 });
 
-
 var imageServer = Meteor.settings.public.imagesUrl || "http://127.0.0.1:8080/";
 
 Template.registerHelper('originalImagePath', function (image) {

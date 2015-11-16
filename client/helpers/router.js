@@ -1,3 +1,5 @@
+RouterAutoscroll.animationDuration = 1000;
+
 Router.map(function() {
     this.route('methodExample', {
         path: '/add_image',
@@ -72,7 +74,7 @@ Router.route('/statistics', {
 Router.configure({
     layoutTemplate: 'main',
     onBeforeAction: function() {
-        window.scrollTo(0, 0);
+
         this.next();
     }
 });

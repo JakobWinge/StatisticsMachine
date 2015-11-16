@@ -7,29 +7,7 @@
 
         <p> Chose: {{chosenRef}}</p>
 
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-lg">
+        {{> pictureLinkerModal instrument = this}}
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Choose instrument!</h4>
-                    </div>
-                    <div class="modal-body">
-                        {{#each instrument}}
-
-                        {{/each}}
-                    </div>
-                    <button type="button" class="btn btn-default" id="setRef" data-dismiss="modal">Close
-                    </button>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </div>
 </template>
