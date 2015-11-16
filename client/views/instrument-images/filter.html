@@ -7,9 +7,9 @@
                     <label for="filterInputClass" class="control-label">Class</label>
 
                     <select id="filterInputClass" name="filterInputClass" class="form-control">
-                        <option value="">ALL</option>
+                        <option value="" {{filterClassChecked}}>ALL</option>
                         {{#each schoolClasses}}
-                            <option value="{{value}}">{{value}}</option>
+                        <option value="{{value}}" {{filterClassChecked}}>{{value}}</option>
                         {{/each}}
                     </select>
                 </div>
@@ -73,6 +73,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group form-group-sm">
+
+                    <label for="filterComment" class="control-label">Comment</label>
+
+                    <input type="text" placeholder="Search comments..." class="form-control" id="filterComment" value="{{filterComment}}"/>
+                </div>
                 <div class="form-group form-group-sm form-group-checkbox">
                     <label class="control-label">Misc</label>
 
@@ -82,14 +88,12 @@
                                           checked="{{port1}}">
                                 Sound Selector</label>
                         </div>
-                            <input type="number" class="form-control small-number-input" id="inputMisconnections" value="0" style="width: 60px;">
-                            <label for="inputMisconnections">Mis-conn.</label>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="filterPort" value="3" id="comment">
-                                Comment</label>
-                        </div>
+                        <input type="number" class="form-control small-number-input" id="inputMisconnections" value="0" style="width: 60px;">
+                        <label for="inputMisconnections">Mis-conn.</label>
+
                     </div>
                 </div>
+
             </form>
         </div>
     </div>

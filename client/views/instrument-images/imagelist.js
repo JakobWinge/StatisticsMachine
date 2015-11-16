@@ -21,7 +21,7 @@ Template.imagelist.helpers({
         var p4 = Session.get("port4");
         var soundselector = Session.get("soundselector");
         var inputMisconnections = Session.get("inputMisconnections");
-        var comment = Session.get("comment");
+        var comment = Session.get("instrumentFilterComment");
 
         var findObject = {};
         var conditions = [];
@@ -29,68 +29,60 @@ Template.imagelist.helpers({
         if (schoolClass !== "" && schoolClass !== undefined) {
             //findObject.class = schoolClass;
             conditions.push({"class": schoolClass});
-            resetInfiniteScroll();
         }
         if (rating !== "" && rating !== undefined) {
             conditions.push({'rating': parseInt(rating)});
-            resetInfiniteScroll();
         }
         if (p1) {
             conditions.push({'sensors.port1': {$nin: [null, ""]}});
-            resetInfiniteScroll();
         }
         if (p2) {
             conditions.push({'sensors.port2': {$nin: [null, ""]}});
-            resetInfiniteScroll();
         }
         if (p3) {
             conditions.push({'sensors.port3': {$nin: [null, ""]}});
-            resetInfiniteScroll();
         }
         if (p4) {
             conditions.push({'sensors.port4': {$nin: [null, ""]}});
-            resetInfiniteScroll();
         }
 
         if (soundselector === true) {
-            resetInfiniteScroll();
             conditions.push({'soundselector': true});
         }
         if (inputMisconnections > 0) {
-            resetInfiniteScroll();
             conditions.push({'misconnections': {$gt: parseInt(inputMisconnections)}});
         }
-        if (comment === true) {
-            resetInfiniteScroll();
-            conditions.push({'comment': {$ne: null}});
+        if (comment) {
+            conditions.push({comment: {
+                $regex: '.*' + comment + '.*',
+                $options: "i"
+            }});
         }
 
         //sensors
         if (Button === true) {
-            resetInfiniteScroll();
             conditions.push(getSensorConditions("Button"));
         }
 
         if (Color === true) {
-            resetInfiniteScroll();
             conditions.push(getSensorConditions("Color"));
         }
 
         if (IR === true) {
-            resetInfiniteScroll();
             conditions.push(getSensorConditions("IR"));
         }
 
         if (UltraSonic === true) {
-            resetInfiniteScroll();
             conditions.push(getSensorConditions("UltraSonic"));
         }
 
         if (Gyro === true) {
-            resetInfiniteScroll();
             conditions.push(getSensorConditions("Gyro"));
         }
 
+        if (conditions.length > 0) {
+            resetInfiniteScroll();
+        }
 
         conditions.push({state: "instrument"});
 

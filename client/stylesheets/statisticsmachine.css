@@ -3,28 +3,29 @@ body {
     background-color: #f1f4f9;
 }
 
-.footer{
+.footer {
     width: 100%;
     height: 200px;
     background-color: #f1f4f9;
 }
 
-.footer .footerCaption{
+.footer .footerCaption {
     color: white;
-    position:relative;
+    position: relative;
     top: 90px;
     font-family: 'Lobster', cursive;
 }
+
 .instrument-container {
     padding-top: 40px;
 }
 
 .filter {
-    background:#fff;
-    border-radius:4px;
+    background: #fff;
+    border-radius: 4px;
     padding: 30px 30px 30px 100px;
     margin-bottom: 20px;
-    position:relative;
+    position: relative;
 }
 
 #showMoreResults {
@@ -32,24 +33,27 @@ body {
     height: 300px;
     top: 100px;
 }
+
 .filter-icon {
-    position:absolute;
-    top:20px;
-    left:15px;
-    bottom:0;
-    width:70px;
-    background:#fff;
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    bottom: 0;
+    width: 70px;
+    background: #fff;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    font-size:2em;
+    font-size: 2em;
     text-align: center;
-    padding-top:10px;
+    padding-top: 10px;
 }
+
 .filter label {
     font-weight: normal;
     text-transform: uppercase;
-    margin-right:0.5em;
+    margin-right: 0.5em;
 }
+
 .navbar {
     background-image: none;
     padding-top: 30px;
@@ -59,128 +63,150 @@ body {
 .well {
     border-radius: 0px;
 }
+
 .jumbotron {
     background-color: #fff;
     border-radius: 0px;
 }
 
-
 .filter .form-group {
     vertical-align: top;
 }
+
 .filter .form-group-checkbox {
     padding-top: 0.3em;
 }
+
 .filter .form-control {
-    margin-right:1em;
+    margin-right: 1em;
 }
+
 .form-checkbox-list {
     display: inline-block;
     vertical-align: top;
 }
+
 .form-checkbox-list .checkbox {
-    display:block;
+    display: block;
 }
 
 .instrument-card {
     background-color: #fff;
     border-radius: 0px;
-    height: 400px;
     padding: 0px;
     margin-bottom: 40px;
 
-
-    position:relative;
-    overflow:hidden;
+    position: relative;
+    overflow: hidden;
     box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.39);
     border: 1px solid #dddddd;
 }
+
 .instrument-card .img-container {
-    width:70%;
-    height:100%;
+    width: 70%;
+    height: 400px;
     overflow: hidden;
-    position:relative;
+    position: relative;
 }
+
 .instrument-card .img-container img {
-    width:100%;
+    width: 100%;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
 }
+
 .instrument-card .action-buttons {
-    float:right;
+    float: right;
 }
+
 .instrument-details {
     position: absolute;
-    top:0;
+    top: 0;
     right: 0;
     bottom: 0;
-    width:30%;
+    width: 30%;
     background: #FFF;
 
-    color:#000;
-    padding:0;
-    box-shadow:-1px 0px 20px rgba(0,0,0,0.3);
+    color: #000;
+    padding: 0;
+    box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
 }
+
 .instrument-details .header {
-    padding:10px;
+    padding: 10px;
     font-weight: bold;
     border-bottom: 1px solid #ddd;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
+
 .instrument-details .header h4 {
-    margin:0;
-    float:left;
+    margin: 0;
+    float: left;
     line-height: 40px;
 }
+
 .instrument-details .form-group {
     vertical-align: bottom;
     padding: 0;
     margin: 0;
 }
+
 .instrument-details .label-container, .instrument-details .value-container {
-    height:40px;
-    display:inline-block;
-    margin:0;
+    height: 40px;
+    display: inline-block;
+    margin: 0;
 }
+
 .instrument-details label {
     text-transform: uppercase;
     font-weight: normal;
-    color:#333;
+    color: #333;
 }
+
 .instrument-details .label-container {
-    width:50%;
+    width: 50%;
     text-align: right;
-    padding-right:0.5em;
+    padding-right: 0.5em;
 }
-.instrument-details .value-container  {
-    font-size:1.5em;
+
+.instrument-details .value-container {
+    font-size: 1.5em;
 
 }
-.instrument-details .value-container:empty:after {
-    content:'n/a'
+
+.instrument-details .value-container.comment {
+    font-size: 1em;
 }
+
+.instrument-details .value-container:empty:after {
+    content: 'n/a'
+}
+
 .instrument-details .port-overview {
     position: absolute;
     bottom: 0;
     width: 100%;
     padding: 10px;
 }
+
 .instrument-details .port-indicator {
     display: inline-block;
     width: 50px;
-    height:50px;
-    border-radius:50%;
-    border:2px solid #333;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #333;
     margin: 0 0.5em 0 0;
 
     background-size: 80% 80%;
     background-position: center center;
     background-repeat: no-repeat;
 }
+
 .instrument-details .port-indicator.sound-selector {
     float: right;
 }
+
 .instrument-details .port-indicator.sound-selector.active {
     background-image: url('sensor-sound-wheel.png');
 }
@@ -188,15 +214,19 @@ body {
 .instrument-details .port-indicator.Button {
     background-image: url('sensor-icon-button.png');
 }
+
 .instrument-details .port-indicator.Color {
     background-image: url('sensor-icon-color.png');
 }
+
 .instrument-details .port-indicator.Gyro {
     background-image: url('sensor-icon-gyro.png');
 }
+
 .instrument-details .port-indicator.UltraSonic {
     background-image: url('sensor-icon-ultra-sonic.png');
 }
+
 .instrument-details .port-indicator.IR {
     background-image: url('sensor-icon-ir.png');
 }
@@ -209,43 +239,54 @@ body {
 h3 {
     margin-top: 0;
 }
+
 h3 .photo-time {
-    font-size:0.5em;
-    float:right;
+    font-size: 0.5em;
+    float: right;
 }
 
 .slider.slider-horizontal {
-    width:100%;
+    width: 100%;
     margin-top: 0.8em;
 }
 
 .slider.slider-horizontal .slider-selection {
     background: #eb6864;
 }
+
 .slider.slider-horizontal .slider-handle {
     background: #393a35;
 }
+
 .sensor-selectors {
-    padding-top:11px;
+    padding-top: 11px;
 }
+
 .sensor-selectors .form-group {
     margin-bottom: 0;
 }
+
 .sensor-selectors select.form-control {
-    padding:5px 10px;
+    padding: 5px 10px;
     width: 90%;
-    height:35px;
+    height: 35px;
 }
+
 .mis-connections {
-    margin-top:4px;
+    margin-top: 4px;
 }
+
 .small-number-input {
-    padding:5px;
-    height:35px;
-    width:40px;
+    padding: 5px;
+    height: 35px;
+    width: 40px;
     display: inline-block;
 }
 
 .login-link-text {
     color: #ffffff;
+}
+
+.filter .tokenfield {
+    min-width: 200px;
 }

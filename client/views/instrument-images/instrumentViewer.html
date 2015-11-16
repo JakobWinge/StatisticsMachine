@@ -38,7 +38,7 @@
 
             <label class="label-container">Comment:</label>
 
-            <p class="value-container">{{comment}}</p>
+            <p class="value-container comment">{{comment}}</p>
 
         </div>
 
@@ -47,11 +47,11 @@
 
     <div class="port-overview">
 
-        <span class="port-indicator {{sensors.port1}}"></span>
-        <span class="port-indicator {{sensors.port2}}"></span>
-        <span class="port-indicator {{sensors.port3}}"></span>
-        <span class="port-indicator {{sensors.port4}}"></span>
+        <span class="port-indicator {{sensors.port1}}" title="PORT1 {{sensors.port1}}"></span>
+        <span class="port-indicator {{sensors.port2}}" title="PORT2 {{sensors.port2}}"></span>
+        <span class="port-indicator {{sensors.port3}}" title="PORT3 {{sensors.port3}}"></span>
+        <span class="port-indicator {{sensors.port4}}" title="PORT4 {{sensors.port4}}"></span>
 
-        <span class="port-indicator sound-selector {{ternary soundselector 'active' ''}}"></span>
+        <span class="port-indicator sound-selector {{ternary soundselector 'active' ''}}" title="Sound Selector: {{ternary soundselector 'YES' 'NO'}}"></span>
     </div>
 </template>
