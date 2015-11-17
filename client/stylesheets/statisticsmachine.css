@@ -257,9 +257,9 @@ h3 .photo-time {
     background:#FFF;
 }
 .chart-container .chart {
-    height:500px;
+    /*height:400px;*/
     width:100%;
 }
-.chart-container .form-group {
-    margin-top:1em;
+.panel-heading select {
+    width:80%;
 }
