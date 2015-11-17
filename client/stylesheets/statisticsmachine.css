@@ -251,3 +251,15 @@ h3 .photo-time {
 .filter .tokenfield {
     min-width:200px;
 }
+
+
+.chart-container {
+    background:#FFF;
+}
+.chart-container .chart {
+    height:500px;
+    width:100%;
+}
+.chart-container .form-group {
+    margin-top:1em;
+}
