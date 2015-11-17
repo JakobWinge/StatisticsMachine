@@ -13,8 +13,21 @@
 
 .picture-container {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .picture-container img{
     width: 100%;
+}
+
+.instrumentRefOptions {
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    background-color: #fff;
+}
+
+.instrumentRefOptions ul
+{
+    list-style-type: none;
 }

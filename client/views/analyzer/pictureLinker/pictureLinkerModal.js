@@ -11,13 +11,6 @@ Template.pictureLinkerModal.helpers({
         return Images.find({_id: {$in: this.instrument.refs || []}})
 
     },
-    original: function () {
-        return imageServer + "originals/";
-    },
-
-    resized: function () {
-        return imageServer + "resized/";
-    },
     chosenRef: function () {
         return Session.get("instrumentForRef");
     }
@@ -37,5 +30,18 @@ Template.pictureLinkerModal.events({
 
         console.log("this", this);
         console.log("parent this", Template.parentData(1));
+    },
+
+    "click .instrumentRefOptionsEdit" : function(event) {
+        $('#pictureRefModal').on('hidden.bs.modal', function () {
+            Router.go("analyzer", {_id : id});
+        });
+        console.log("click!", this._id);
+        $('#pictureRefModal').modal('hide');
+        event.preventDefault();
+        var id = this._id;
+
+
     }
+
 });
