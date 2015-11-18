@@ -305,4 +305,5 @@ h3 .photo-time {
 }
 .panel-heading select {
     width:80%;
+    width:calc(100% - 50px);
 }
