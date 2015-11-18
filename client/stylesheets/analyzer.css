@@ -31,3 +31,22 @@
 {
     list-style-type: none;
 }
+
+.analyzerPicturelinkButton {
+    padding: 24px;
+}
+
+.column-padding {
+    margin-bottom: 15px;
+}
+
+.analyzer-container {
+    position:relative;
+}
+
+.nextButton {
+    position: absolute;
+    right: -200px;
+    top: 250px;
+
+}

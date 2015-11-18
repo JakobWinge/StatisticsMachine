@@ -1,6 +1,6 @@
 <template name="pictureLinkerModal">
     <!-- Modal -->
-    <div id="pictureRefModal" class="modal fade" role="dialog">
+    <div id="pictureRefModal{{picture._id}}" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
@@ -21,14 +21,20 @@
                                 <div class="instrumentRefOptions">
                                     <ul>
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                                    class="fa fa-bars"></i><b class="caret"></b></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i><b class="caret"></b></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="{{originalImagePath path}}"
-                                                       data-lightbox="choosenInstrument"><i
-                                                        class="fa fa-search-plus Zoom"></i> Zoom</a></li>
-                                                <li><a href="#"><i class="fa fa-trash-o Delete"></i> Remove
-                                                    Instrument</a></li>
+                                                <li><a href="{{originalImagePath path}}" data-lightbox="choosenInstrument">
+                                                    <i class="fa fa-search-plus Zoom"></i> Zoom</a>
+                                                </li>
+                                                <li><a href="#" class="instrumentRefOptionsEdit">
+                                                    <i class="fa fa-pencil-square-o"></i> Edit
+                                                    Instrument</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="instrumentRefOptionsDelete">
+                                                        <i class="fa fa-trash-o Delete"></i> Remove
+                                                        Instrument</a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -40,20 +46,26 @@
                     <hr>
                     <div class="row">
                         <h3>Choose instrument in picture: </h3>
-                        {{#each instrument}}
+                        {{#each pictures}}
                             <div class="picture-container col-sm-6">
                                 <img class="setRef" src="{{resizedImagePath path}}" alt=""/>
 
                                 <div class="instrumentRefOptions">
                                     <ul>
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                                    class="fa fa-bars"></i><b class="caret"></b></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="fa fa-bars"></i>
+                                                <b class="caret"></b>
+                                            </a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="{{originalImagePath path}}" data-lightbox="instrument"><i
-                                                        class="fa fa-search-plus Zoom"></i> Zoom</a></li>
-                                                <li ><a href="#" class="instrumentRefOptionsEdit"><i class="fa fa-pencil-square-o"></i> Edit
-                                                    Instrument</a></li>
+                                                <li>
+                                                    <a href="{{originalImagePath path}}" data-lightbox="instrument">
+                                                        <i class="fa fa-search-plus Zoom"></i> Zoom </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="instrumentRefOptionsEdit">
+                                                        <i class="fa fa-pencil-square-o"></i> Edit Instrument</a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>

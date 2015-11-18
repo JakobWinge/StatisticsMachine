@@ -1,13 +1,33 @@
 <template name="pictureChanger">
     <div class="col-sm-12 description">
         <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pictureRefModal">Open Modal</button>
 
         <p>Class: {{class}}</p>
 
-        <p> Chose: {{chosenRef}}</p>
+        <div class="row">
+            <div class="col-sm-12 column-padding">
 
-        {{> pictureLinkerModal instrument = this}}
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Tags</label>
+
+                    <div class="col-sm-9">
+                        {{>tagInput}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 column-padding">
+                <div class="form-group">
+                    <label for="inputComment" class="col-sm-3 control-label">Comment</label>
+
+                    <div class="col-sm-9">
+                            <textarea id="inputComment" class="form-control" rows="8"
+                                      placeholder="Write a comment or description...">{{comment}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>

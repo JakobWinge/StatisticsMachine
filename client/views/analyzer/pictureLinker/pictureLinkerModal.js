@@ -1,47 +1,58 @@
 var imageServer = Meteor.settings.public.imagesUrl || "http://127.0.0.1:8080/";
 
 Template.pictureLinkerModal.helpers({
-    instrument: function () {
-        return Images.find({'class': this.instrument.class, 'state': 'instrument'})
+    pictures: function () {
+        var instrumentsFromClass =  Images.find({'class': this.picture.class, 'state': 'instrument'}).fetch();
+        var filterArray = this.picture.refs;
+        return _.filter(instrumentsFromClass, function(entry) {
+            if ($.inArray(entry._id, filterArray) > -1){
+                return false
+            } else {
+                return true;
+            }
+        })
     },
 
     instrumentRefs: function () {
-        console.log("find: ", this.instrument.refs);
+        return Images.find({_id: {$in: this.picture.refs || []}})
 
-        return Images.find({_id: {$in: this.instrument.refs || []}})
-
-    },
-    chosenRef: function () {
-        return Session.get("instrumentForRef");
     }
 });
 
 Template.pictureLinkerModal.events({
 
     "click .setRef": function () {
+        console.log("images clicked", Template.parentData(1));
 
-        var refs = Template.parentData(1).refs || [];
+        var refs = Template.parentData(1).picture.refs || [];
         if ($.inArray(this._id, refs) === -1) {
             refs.push(this._id);
-            Images.update(Template.parentData(1)._id, {
+            Images.update(Template.parentData(1).picture._id, {
                 $set: {'refs': refs}
             });
         }
-
-        console.log("this", this);
-        console.log("parent this", Template.parentData(1));
     },
 
     "click .instrumentRefOptionsEdit" : function(event) {
-        $('#pictureRefModal').on('hidden.bs.modal', function () {
-            Router.go("analyzer", {_id : id});
+        console.log("Edit!", this);
+        var self = this;
+        $('#pictureRefModal' + Template.parentData(1).picture._id).on('hidden.bs.modal', function () {
+            Router.go("analyzer", {_id : self._id});
         });
-        console.log("click!", this._id);
-        $('#pictureRefModal').modal('hide');
+        $('#pictureRefModal'  + Template.parentData(1).picture._id).modal('hide');
         event.preventDefault();
-        var id = this._id;
+    },
 
+    "click .instrumentRefOptionsDelete" : function() {
+        var refs = Template.parentData(1).picture.refs || [];
+        var index = $.inArray(this._id, refs);
 
+        if (index !== -1) {
+            refs.splice(index, 1);
+            Images.update(Template.parentData(1).picture._id, {
+                $set: {'refs': refs}
+            });
+        }
     }
 
 });

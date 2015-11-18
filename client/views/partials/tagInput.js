@@ -33,7 +33,7 @@ Template.tagInput.onRendered(function() {
             $set: {tags: tags}
         });
         self.data.tags = tags;
-    }
+    };
 
     // Avoid duplicates
     elem.on('tokenfield:createtoken', function (event) {

@@ -4,14 +4,14 @@ Template.imagelist.helpers({
     moreResults: function () {
         // If, once the subscription is ready, we have less rows than we
         // asked for, we've got all the rows in the collection.
-        return !(Images.find(Session.get("findObject")).count() < Session.get("itemsLimit"));
+        return !(Images.find(Session.get("filterObject")).count() < Session.get("itemsLimit"));
     },
 
     images: function () {
 
         var filterObject = Session.get("filterObject") || {state:"instrument"};
 
-        if (filterObject.$and && filterObject.$and.length > 0) {
+        if (filterObject.$and && filterObject.$and.length > 1) {
             resetInfiniteScroll();
         }
 
