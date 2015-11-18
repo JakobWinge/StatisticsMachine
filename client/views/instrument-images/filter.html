@@ -16,13 +16,10 @@
                 <div class="form-group form-group-sm">
                     <label for="filterInputRating" class="control-label">Rating</label>
                     <select id="filterInputRating" name="filterInputRating" class="form-control">
-                        <option value="" selected>ALL</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="" {{filterRatingChecked}}>ALL</option>
+                        {{#each loopCount 5 1}}
+                            <option value="{{this}}" {{filterRatingChecked}}>{{this}}</option>
+                        {{/each}}
                     </select>
                 </div>
                 <div class="form-group form-group-sm form-group-checkbox">
@@ -31,23 +28,23 @@
                     <div class="form-checkbox-list">
                         <div class="checkbox">
                             <label><input type="checkbox" id="sensorButton" name="filterSensors" value="button"
-                                          checked="{{sensorButton}}"> Button</label>
+                                          checked="{{filterSensorChecked 'Button'}}"> Button</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="filterSensors" id="sensorColor" value="color"
-                                          checked="{{sensorColor}}"> Color</label>
+                                          checked="{{filterSensorChecked 'Color'}}"> Color</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="filterSensors" id="sensorIR" value="ir"
-                                          checked="{{sensorIR}}"> IR</label>
+                                          checked="{{filterSensorChecked 'IR'}}"> IR</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="filterSensors" id="sensorUltraSonic" value="ultra-sonic"
-                                          checked="{{sensorUltraSonic}}"> Ultra-Sonic</label>
+                                          checked="{{filterSensorChecked 'UltraSonic'}}"> Ultra-Sonic</label>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="filterSensors" id="sensorGyro" value="gyro"
-                                          checked="{{sensorGyro}}"> Gyro</label>
+                                          checked="{{filterSensorChecked 'Gyro'}}"> Gyro</label>
                         </div>
                     </div>
                 </div>
@@ -56,41 +53,45 @@
 
                     <div class="form-checkbox-list">
                         <div class="checkbox">
-                            <label><input type="checkbox" name="filterPort" value="1" id="port1" checked="{{port1}}">
+                            <label><input type="checkbox" name="filterPort" value="1" id="port1" checked="{{filterPortChecked 1}}">
                                 Port 1</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="filterPort" value="2" id="port2" checked="{{port2}}">
+                            <label><input type="checkbox" name="filterPort" value="2" id="port2" checked="{{filterPortChecked 2}}">
                                 Port 2</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="filterPort" value="3" id="port3" checked="{{port3}}">
+                            <label><input type="checkbox" name="filterPort" value="3" id="port3" checked="{{filterPortChecked 3}}">
                                 Port 3</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="filterPort" value="4" id="port4" checked="{{port4}}">
+                            <label><input type="checkbox" name="filterPort" value="4" id="port4" checked="{{filterPortChecked 4}}">
                                 Port 4</label>
                         </div>
                     </div>
                 </div>
-                <div class="form-group form-group-sm">
+                <!--<div class="form-group form-group-sm">
 
                     <label for="filterComment" class="control-label">Comment</label>
 
-                    <input type="text" placeholder="Search comments..." class="form-control" id="filterComment" value="{{filterComment}}"/>
-                </div>
+
+                </div>-->
                 <div class="form-group form-group-sm form-group-checkbox">
                     <label class="control-label">Misc</label>
 
                     <div class="form-checkbox-list">
-                        <div class="checkbox">
+                        <div class="checkbox form-sub-group">
                             <label><input type="checkbox" name="filterPort" value="1" id="soundselector"
-                                          checked="{{port1}}">
+                                          checked="{{filterSoundSelectorChecked}}">
                                 Sound Selector</label>
                         </div>
-                        <input type="number" class="form-control small-number-input" id="inputMisconnections" value="0" style="width: 60px;">
-                        <label for="inputMisconnections">Mis-conn.</label>
-
+                        <div class="form-sub-group">
+                            <input type="number" class="form-control small-number-input" id="inputMisconnections" value="{{filterMisconnectionsValue}}" style="width: 60px;">
+                            <label for="inputMisconnections">Mis-conn.</label>
+                        </div>
+                        <div class="form-sub-group">
+                            <input type="text" placeholder="Search comments..." class="form-control" id="filterComment" value="{{filterCommentValue}}"/>
+                        </div>
                     </div>
                 </div>
 

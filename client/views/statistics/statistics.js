@@ -2,6 +2,10 @@
  * Created by jeppestougaard on 16/11/15.
  */
 
+function getFilter() {
+    return Session.get("filterObject") || {state:"instrument"};
+}
+
 Template.statistics.events = {
     "click #addChart": function (event, template) {
         console.log("New chart")
@@ -23,5 +27,9 @@ Template.statistics.events = {
 Template.statistics.helpers({
     charts: function() {
         return Charts.find();
+    },
+
+    setSize: function() {
+        return Images.find(getFilter()).count();
     }
 });

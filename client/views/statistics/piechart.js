@@ -58,20 +58,46 @@ var countableProperties = [
         groupBy: function(item) {
             return _.contains(item.sensors, "UltraSonic") ? "YES" : "NO";
         }
+    },
+    {
+        name: "Using port 1",
+        groupBy: function(item) {
+            return item.sensors.port1 ? "YES" : "NO";
+        }
+    },
+    {
+        name: "Using port 2",
+        groupBy: function(item) {
+            return item.sensors.port2 ? "YES" : "NO";
+        }
+    },
+    {
+        name: "Using port 3",
+        groupBy: function(item) {
+            return item.sensors.port3 ? "YES" : "NO";
+        }
+    },
+    {
+        name: "Using port 4",
+        groupBy: function(item) {
+            return item.sensors.port4 ? "YES" : "NO";
+        }
     }
 ];
 var undefinedLabel = "Not set";
-
+function getFilter() {
+    return Session.get("filterObject") || {state:"instrument"};
+}
 
 
 
 Template.piechart.onCreated(function() {
-    console.log("Chart created", this, this.data._id);
+    //console.log("Chart created", this, this.data._id);
 
     this.chart = null;
 
     this.getChartData = function() {
-        var images = Images.find({state:"instrument"}).fetch();
+        var images = Images.find(getFilter()).fetch();
 
         var groupBy = this.getCountProperty().groupBy;
 
@@ -99,8 +125,6 @@ Template.piechart.onCreated(function() {
     };
 
     this.builtChart = function() {
-
-        console.log("Data", this.getChartData(), this.getCountProperty().name);
 
         this.chart = $(this.find('.chart')).highcharts({
             chart: {
@@ -141,18 +165,21 @@ Template.piechart.onCreated(function() {
  * Call the function to built the chart when the template is rendered
  */
 Template.piechart.onRendered(function () {
-    console.log("Chart", this);
     //Tracker.autorun(this.builtChart.bind(this));
     var self = this;
-    self.builtChart();
+
     Charts.find(this.data._id).observeChanges({
         changed: function(ev, changes) {
-            console.log("Chart changed", changes);
             if (changes.hasOwnProperty("propertyType")) {
                 self.data.propertyType = changes.propertyType;
                 self.builtChart();
             }
         }
+    });
+
+    Tracker.autorun(function() {
+        //console.log("Tracker autorun", Session.get("filterObject"));
+        self.builtChart();
     });
 });
 
@@ -164,7 +191,6 @@ Template.piechart.events = {
     "change .property-selector": function (event, template) {
 
         var newValue = $(event.target).val();
-        console.log("Change chart", template.data._id, newValue);
         /*Session.set(template.sessionKeyName, newValue);*/
         Charts.update(template.data._id, {$set: {propertyType: parseInt(newValue, 10)}});
     }
