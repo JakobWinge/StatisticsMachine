@@ -8,111 +8,17 @@ Template.imagelist.helpers({
     },
 
     images: function () {
-        var schoolClass = Session.get("filterInputClass");
-        var rating = Session.get("filterInputRating");
-        var Button = Session.get("sensorButton");
-        var Color = Session.get("sensorColor");
-        var IR = Session.get("sensorIR");
-        var UltraSonic = Session.get("sensorUltraSonic");
-        var Gyro = Session.get("sensorGyro");
-        var p1 = Session.get("port1");
-        var p2 = Session.get("port2");
-        var p3 = Session.get("port3");
-        var p4 = Session.get("port4");
-        var soundselector = Session.get("soundselector");
-        var inputMisconnections = Session.get("inputMisconnections");
-        var comment = Session.get("instrumentFilterComment");
 
-        var findObject = {};
-        var conditions = [];
+        var filterObject = Session.get("filterObject") || {state:"instrument"};
 
-        if (schoolClass !== "" && schoolClass !== undefined) {
-            //findObject.class = schoolClass;
-            conditions.push({"class": schoolClass});
-        }
-        if (rating !== "" && rating !== undefined) {
-            conditions.push({'rating': parseInt(rating)});
-        }
-        if (p1) {
-            conditions.push({'sensors.port1': {$nin: [null, ""]}});
-        }
-        if (p2) {
-            conditions.push({'sensors.port2': {$nin: [null, ""]}});
-        }
-        if (p3) {
-            conditions.push({'sensors.port3': {$nin: [null, ""]}});
-        }
-        if (p4) {
-            conditions.push({'sensors.port4': {$nin: [null, ""]}});
-        }
-
-        if (soundselector === true) {
-            conditions.push({'soundselector': true});
-        }
-        if (inputMisconnections > 0) {
-            conditions.push({'misconnections': {$gt: parseInt(inputMisconnections)}});
-        }
-        if (comment) {
-            conditions.push({comment: {
-                $regex: '.*' + comment + '.*',
-                $options: "i"
-            }});
-        }
-
-        //sensors
-        if (Button === true) {
-            conditions.push(getSensorConditions("Button"));
-        }
-
-        if (Color === true) {
-            conditions.push(getSensorConditions("Color"));
-        }
-
-        if (IR === true) {
-            conditions.push(getSensorConditions("IR"));
-        }
-
-        if (UltraSonic === true) {
-            conditions.push(getSensorConditions("UltraSonic"));
-        }
-
-        if (Gyro === true) {
-            conditions.push(getSensorConditions("Gyro"));
-        }
-
-        if (conditions.length > 0) {
+        if (filterObject.$and && filterObject.$and.length > 0) {
             resetInfiniteScroll();
         }
 
-        conditions.push({state: "instrument"});
 
-        findObject = conditions.length > 0 ? {$and: conditions} : {};
-
-        Session.set("findObject", findObject);
-
-
-        return Images.find(findObject, {limit: Session.get('itemsLimit')});
-        // {$or : [{name : "hej",}, {name: "dav"}]};
+        return Images.find(filterObject, {limit: Session.get('itemsLimit')});
     }
 });
-
-var getSensorConditions = function (sensorName) {
-    return {
-        $or: [{"sensors.port1": sensorName}, {"sensors.port2": sensorName}, {"sensors.port3": sensorName}, {"sensors.port4": sensorName}]
-    };
-};
-
-var packSelectors = function (sensor, findObject) {
-    var findObject1 = jQuery.extend({}, findObject);
-    var findObject2 = jQuery.extend({}, findObject);
-    var findObject3 = jQuery.extend({}, findObject);
-    var findObject4 = jQuery.extend({}, findObject);
-    findObject1['sensors.port1'] = sensor;
-    findObject2['sensors.port2'] = sensor;
-    findObject3['sensors.port3'] = sensor;
-    findObject4['sensors.port4'] = sensor;
-    return {$or: [findObject1, findObject2, findObject3, findObject4]};
-};
 
 function showMoreVisible() {
         var threshold, target = $("#showMoreResults");

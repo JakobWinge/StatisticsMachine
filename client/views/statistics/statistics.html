@@ -1,3 +1,28 @@
 <template name="statistics">
-    <h1>Statistics</h1>
+
+    {{> filter}}
+
+    <h1>Statistics <button id="addChart" class="btn btn-primary"><i class="fa fa-plus"></i></button></h1>
+
+    <div class="well clearfix">
+        <a class="btn btn-info pull-right" href="/">View instruments</a>
+        <h4>Current data set size: {{setSize}}</h4>
+    </div>
+
+    <div class="row">
+        {{#each chart in charts}}
+            <div class="col-sm-6 col-lg-4">
+                {{> Template.dynamic template=chart.type data=chart}}
+            </div>
+        {{/each}}
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {{>barchart}}
+        </div>
+    </div>
+
+
 </template>
