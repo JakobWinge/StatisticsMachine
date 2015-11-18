@@ -101,6 +101,10 @@ Template.instrumentChanger.helpers({
         }
     },
 
+    picturesOfInstruments : function() {
+      return Images.find({refs : this.id})
+    },
+
     soundSelectorChecked: function(soundselector) {
         if(soundselector) return "checked";
     }

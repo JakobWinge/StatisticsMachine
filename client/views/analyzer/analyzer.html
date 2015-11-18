@@ -1,6 +1,7 @@
 <template name="analyzer">
     <div class="analyzer-container col-sm-12 jumbotron">
-        <div class="nextButton"><h1><a href="{{pathFor route='analyzer-random'}}"><i class="fa fa-arrow-circle-right"></i></a></h1></div>
+        <div class="nextButton"><h1><a href="{{pathFor route='analyzer-random'}}"><i
+                class="fa fa-arrow-circle-right"></i></a></h1></div>
         <div class="center-block">
             <img src="{{resizedImagePath path}}" class="analyzer-image" alt=""/>
         </div>
@@ -24,6 +25,15 @@
             {{>pictureChanger}}
         {{/if}}
 
+    </div>
+
+    <div class="col-sm-12 jumbotron">
+        {{#if equals instrument 'instrument'}}
+            {{>picturesOfInstrument}}
+        {{/if}}
+        {{#if equals instrument 'picture'}}
+                {{>InstrumentsInPicture picture = this}}
+        {{/if}}
     </div>
 
 </template>
