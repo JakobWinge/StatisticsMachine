@@ -1,5 +1,25 @@
 <template name="picturesOfInstrument">
-    <row>
-    <span><h2>Pictures of the instrument</h2></span>
-    </row>
+    {{#each pictureOfInstrument}}
+        <div class="picture-container col-sm-6">
+            <img src="{{resizedImagePath path}}" alt=""/>
+
+            <div class="instrumentRefOptions">
+                <ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-bars"></i><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{originalImagePath path}}"
+                                   data-lightbox="choosenInstrument"><i
+                                    class="fa fa-search-plus Zoom"></i> Zoom</a></li>
+                            <li ><a href="{{pathFor 'analyzer' _id=_id }}" class="instrumentRefOptionsEdit"><i class="fa fa-pencil-square-o"></i> Edit
+                                Instrument</a></li>
+                            <li><a href="#" class="instrumentRefOptionsDelete"><i class="fa fa-trash-o Delete"></i> Remove
+                                Instrument</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {{/each}}
 </template>
