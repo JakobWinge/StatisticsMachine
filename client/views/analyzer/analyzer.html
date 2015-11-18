@@ -9,8 +9,10 @@
     <div class="col-sm-12 jumbotron">
         <div class="col-sm-offset-4 col-sm-4">
             <ul class="nav nav-pills nav-justified">
-                <li role="presentation" id="instrumentState" class="{{getState "instrument"}}"><a href="#">Instrument</a></li>
-                <li role="presentation" id="pictureState" class="{{getState "picture"}}"><a href="#">Picture / Video</a></li>
+                <li role="presentation" id="instrumentState" class="{{getState "instrument"}}"><a
+                        href="#">Instrument</a></li>
+                <li role="presentation" id="pictureState" class="{{getState "picture"}}"><a href="#">Picture / Video</a>
+                </li>
             </ul>
         </div>
 
@@ -18,9 +20,7 @@
             {{>instrumentChanger}}
         {{/if}}
         {{#if equals instrument 'picture'}}
-            <p>
-
-            <h1>picture</h1></p>
+            {{>pictureChanger}}
         {{/if}}
 
     </div>
@@ -28,13 +28,15 @@
     {{#if isStateSet}}
 
 
-    <div class="col-sm-12 jumbotron">
-        <nav>
-            <ul class="pager">
-                <button type="button" class="btn btn-primary pull-right" id="saveState"><i class="fa fa-floppy-o"></i> Save</button>
-                <br/>
-            </ul>
-        </nav>
-    </div>
+        <div class="col-sm-12 jumbotron">
+            <nav>
+                <ul class="pager">
+                    <button type="button" class="btn btn-primary pull-right" id="saveState"><i
+                            class="fa fa-floppy-o"></i> Save
+                    </button>
+                    <br/>
+                </ul>
+            </nav>
+        </div>
     {{/if}}
 </template>

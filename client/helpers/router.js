@@ -1,3 +1,5 @@
+RouterAutoscroll.animationDuration = 1000;
+
 Router.map(function() {
     this.route('methodExample', {
         path: '/add_image',
@@ -46,13 +48,12 @@ Router.route('/analyzer/:_id', {
     name: "analyzer",
     template: "analyzer",
     onBeforeAction: function () {
+        Session.set("instrumentForRef", "");
         if(this.params._id !== "default") {
-            console.log("onBefore is not default", this.params._id);
             var returnObject = Images.findOne({ _id: this.params._id });
             Session.set("state", returnObject.state);
             this.next();
         } else {
-            console.log("onBefore is default!", this.params._id);
             Session.set("state", "");
             this.next();
         }
@@ -73,7 +74,7 @@ Router.route('/statistics', {
 Router.configure({
     layoutTemplate: 'main',
     onBeforeAction: function() {
-        window.scrollTo(0, 0);
+
         this.next();
     }
 });
