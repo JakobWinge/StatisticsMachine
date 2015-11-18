@@ -1,9 +1,10 @@
 <template name="analyzer">
     <div class="analyzer-container col-sm-12 jumbotron">
+        <div class="nextButton"><h1><a href="{{pathFor route='analyzer-random'}}"><i class="fa fa-arrow-circle-right"></i></a></h1></div>
         <div class="center-block">
-            <a href="{{original}}{{path}}" target="_blank" class="analyzer-image"
-               style="background-image:url('{{resized}}{{path}}');"></a>
+            <img src="{{resizedImagePath path}}" class="analyzer-image" alt=""/>
         </div>
+
     </div>
 
     <div class="col-sm-12 jumbotron">
@@ -25,18 +26,4 @@
 
     </div>
 
-    {{#if isStateSet}}
-
-
-        <div class="col-sm-12 jumbotron">
-            <nav>
-                <ul class="pager">
-                    <button type="button" class="btn btn-primary pull-right" id="saveState"><i
-                            class="fa fa-floppy-o"></i> Save
-                    </button>
-                    <br/>
-                </ul>
-            </nav>
-        </div>
-    {{/if}}
 </template>

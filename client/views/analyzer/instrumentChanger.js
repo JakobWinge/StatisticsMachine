@@ -74,6 +74,11 @@ Template.instrumentChanger.onRendered(function() {
         }
     });
 
+    if (this.data.rating === null) {
+        console.log("updating rating", this);
+        Images.update(this.data._id, {$set: {rating : 0}})
+    }
+
 });
 
 Template.instrumentChanger.helpers({
@@ -94,10 +99,6 @@ Template.instrumentChanger.helpers({
         if (this.value === db) {
             return "selected";
         }
-    },
-
-    myTags: function() {
-        return (this.tags || []).join(",");
     },
 
     soundSelectorChecked: function(soundselector) {

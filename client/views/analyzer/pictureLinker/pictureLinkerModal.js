@@ -1,18 +1,16 @@
 var imageServer = Meteor.settings.public.imagesUrl || "http://127.0.0.1:8080/";
 
 Template.pictureLinkerModal.helpers({
-    instrument: function () {
-        return Images.find({'class': this.instrument.class, 'state': 'instrument'})
+    pictures: function () {
+        console.log("this", this.picture.class);
+        return Images.find({'class': this.picture.class, 'state': 'instrument'})
     },
 
     instrumentRefs: function () {
-        console.log("find: ", this.instrument.refs);
+        console.log("find: ", this.picture.refs);
 
-        return Images.find({_id: {$in: this.instrument.refs || []}})
+        return Images.find({_id: {$in: this.picture.refs || []}})
 
-    },
-    chosenRef: function () {
-        return Session.get("instrumentForRef");
     }
 });
 
@@ -36,12 +34,22 @@ Template.pictureLinkerModal.events({
         $('#pictureRefModal').on('hidden.bs.modal', function () {
             Router.go("analyzer", {_id : id});
         });
-        console.log("click!", this._id);
         $('#pictureRefModal').modal('hide');
         event.preventDefault();
-        var id = this._id;
+    },
 
+    "click .instrumentRefOptionsDelete" : function() {
+        var refs = Template.parentData(1).refs || [];
+        console.log("refs", refs);
+        console.log("looking for", this._id);
+        var index = $.inArray(this._id, refs);
 
+        if (index !== -1) {
+            refs.splice(index, 1);
+            Images.update(Template.parentData(1)._id, {
+                $set: {'refs': refs}
+            });
+        }
     }
 
 });

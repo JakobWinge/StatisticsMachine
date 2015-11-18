@@ -1,4 +1,4 @@
-RouterAutoscroll.animationDuration = 1000;
+RouterAutoscroll.animationDuration = 1;
 
 Router.map(function() {
     this.route('methodExample', {
@@ -44,11 +44,20 @@ Router.route('/picture-images', {
         this.next();
     }
 });
+
+Router.route('/analyzer', {
+    name:"analyzer-random",
+    action: function() {
+        var array = Images.find({'state' : {$nin:["instrument", "picture"]}}).fetch();
+        var randomIndex = Math.floor( Math.random() * array.length );
+        Router.go('/analyzer/'+array[randomIndex]._id);
+    }
+});
+
 Router.route('/analyzer/:_id', {
     name: "analyzer",
     template: "analyzer",
     onBeforeAction: function () {
-        Session.set("instrumentForRef", "");
         if(this.params._id !== "default") {
             var returnObject = Images.findOne({ _id: this.params._id });
             Session.set("state", returnObject.state);
@@ -57,7 +66,6 @@ Router.route('/analyzer/:_id', {
             Session.set("state", "");
             this.next();
         }
-
     },
     data: function() {
         if(this.params._id !== "default") {
@@ -66,6 +74,8 @@ Router.route('/analyzer/:_id', {
         return Images.findOne(Images.findOne({'state' : {$nin:["instrument", "picture"]}}));
     }
 });
+
+
 Router.route('/statistics', {
     name: "statistics",
     template: "statistics"

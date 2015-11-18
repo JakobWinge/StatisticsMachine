@@ -3,26 +3,8 @@ var imageServer = Meteor.settings.public.imagesUrl || "http://127.0.0.1:8080/";
 
 Template.analyzer.helpers({
 
-    original: function () {
-        return imageServer + "originals/";
-    },
-
-    resized: function () {
-        return imageServer + "resized/";
-    },
-
     instrument: function () {
         return Session.get("state");
-    },
-    isStateSet : function() {
-        if(Router.current().params._id !== "default") {
-            return false
-        }
-        if(Session.get("state") === "instrument" || Session.get("state") === "picture") {
-            return true;
-        } else {
-            return false;
-        }
     },
     getState : function(type) {
         if(Router.current().params._id === "default") {

@@ -3,6 +3,7 @@
     <div class="header clearfix">
         <h4>{{baseName}}</h4>
         <div class="action-buttons">
+            <a class="btn btn-warning" href="#" data-toggle="modal" data-target="#pictureRefModal{{_id}}"><i class="fa fa-link"></i></a>
             <a class="btn btn-default" href="{{originalImagePath path}}"  data-lightbox="instrument"><i class="fa fa-expand"></i></a>
             <a class="btn btn-info" href="{{pathFor route='analyzer' _id= _id}}"><i class="fa fa-pencil"></i></a>
         </div>
@@ -34,5 +35,7 @@
 
 
     </div>
+
+    {{> pictureLinkerModal picture = this}}
 
 </template>

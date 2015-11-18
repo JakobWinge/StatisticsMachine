@@ -1,6 +1,6 @@
 <template name="pictureLinkerModal">
     <!-- Modal -->
-    <div id="pictureRefModal" class="modal fade" role="dialog">
+    <div id="pictureRefModal{{picture._id}}" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
@@ -27,7 +27,7 @@
                                                 <li><a href="{{originalImagePath path}}"
                                                        data-lightbox="choosenInstrument"><i
                                                         class="fa fa-search-plus Zoom"></i> Zoom</a></li>
-                                                <li><a href="#"><i class="fa fa-trash-o Delete"></i> Remove
+                                                <li><a href="#" class="instrumentRefOptionsDelete"><i class="fa fa-trash-o Delete"></i> Remove
                                                     Instrument</a></li>
                                             </ul>
                                         </li>
@@ -40,7 +40,7 @@
                     <hr>
                     <div class="row">
                         <h3>Choose instrument in picture: </h3>
-                        {{#each instrument}}
+                        {{#each pictures}}
                             <div class="picture-container col-sm-6">
                                 <img class="setRef" src="{{resizedImagePath path}}" alt=""/>
 
