@@ -2,7 +2,10 @@
 
     {{> filter}}
 
-    <h1>Statistics <button id="addChart" class="btn btn-primary"><i class="fa fa-plus"></i></button></h1>
+    <h1>Statistics
+        <button id="addPieChart" class="btn btn-primary"><i class="fa fa-pie-chart"></i> New</button>
+        <button id="addBarChart" class="btn btn-primary"><i class="fa fa-bar-chart"></i> New</button>
+    </h1>
 
     <div class="well clearfix">
         <a class="btn btn-info pull-right" href="/">View instruments</a>
@@ -11,18 +14,16 @@
 
     <div class="row">
         {{#each chart in charts}}
-            <div class="col-sm-6 col-lg-4">
-                {{> Template.dynamic template=chart.type data=chart}}
-            </div>
+            {{> Template.dynamic template=chart.type data=chart}}
         {{/each}}
 
     </div>
 
-    <div class="row">
+    <!--<div class="row">
         <div class="col-sm-12">
             {{>barchart}}
         </div>
-    </div>
+    </div>-->
 
 
 </template>

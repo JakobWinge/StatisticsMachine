@@ -101,7 +101,7 @@ Template.piechart.onCreated(function() {
 
         var groupBy = this.getCountProperty().groupBy;
 
-        return _.map(_.countBy(images, function(item) {
+        return _.sortBy(_.map(_.countBy(images, function(item) {
             if (_.isString(groupBy)) {
                 return (typeof item[groupBy] == "undefined" || item[groupBy] === null) ? undefinedLabel : item[groupBy];
             } else if (_.isFunction(groupBy)) {
@@ -112,7 +112,7 @@ Template.piechart.onCreated(function() {
                 y: num,
                 name: key
             };
-        });
+        }), "name");
     };
 
     this.getCountProperty = function() {
@@ -134,6 +134,9 @@ Template.piechart.onCreated(function() {
             },
             title: {
                 text: this.getChartTitle()
+            },
+            credits: {
+                enabled: false
             },
             tooltip: {
                 pointFormat: '<b>{point.y} ({point.percentage:.1f}%)</b>'

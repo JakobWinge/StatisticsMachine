@@ -7,11 +7,19 @@ function getFilter() {
 }
 
 Template.statistics.events = {
-    "click #addChart": function (event, template) {
-        console.log("New chart")
+    "click #addPieChart": function (event, template) {
+        console.log("New pie chart")
 
         Charts.insert({
             type: "piechart"
+        });
+    },
+
+    "click #addBarChart": function (event, template) {
+        console.log("New bar chart")
+
+        Charts.insert({
+            type: "barchart"
         });
     },
 
@@ -33,3 +41,20 @@ Template.statistics.helpers({
         return Images.find(getFilter()).count();
     }
 });
+
+
+function getChartColors() {
+    var colors = [],
+        base = "#eb6864", //Highcharts.getOptions().colors[0],
+        i;
+
+    for (i = 0; i < 10; i += 1) {
+        // Start out with a darkened base color (negative brighten), and end
+        // up with a much brighter color
+        colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+    }
+    return colors;
+}
+
+Highcharts.getOptions().plotOptions.pie.colors = getChartColors();
+//Highcharts.getOptions().colors = getChartColors();
