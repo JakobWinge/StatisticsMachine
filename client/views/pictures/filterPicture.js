@@ -89,7 +89,7 @@ Template.filterPicture.onRendered(function() {
         }
 
         // No none-existing tags
-        var available_tags = ImageTags.find().fetch();
+        /*var available_tags = ImageTags.find().fetch();
         var exists = false;
         $.each(available_tags, function(index, tag) {
             if (tag.value === event.attrs.value)
@@ -97,7 +97,7 @@ Template.filterPicture.onRendered(function() {
         });
         if(!exists) {
             event.preventDefault();
-        }
+        }*/
     });
 
     elem.on('tokenfield:createdtoken', function (event) {

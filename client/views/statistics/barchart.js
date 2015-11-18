@@ -43,7 +43,7 @@ var chartTypes = {
                     data[type][i]++;
                 }
             });
-            
+
             return _.values(_.map(data, function(data, key) {
                 return {name: key, data: data};
             }));
