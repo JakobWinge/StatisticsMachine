@@ -7,8 +7,12 @@ var countableProperties = [
         groupBy: "class"
     },
     {
-        name: "Rating distribution",
-        groupBy: "rating"
+        name: "Instrument rating distribution",
+        groupBy: "instrumentRating"
+    },
+    {
+        name: "Decoration rating distribution",
+        groupBy: "decorationRating"
     },
     {
         name: "Number of mis-connections",

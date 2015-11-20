@@ -23,9 +23,25 @@
 
         <div class="form-group">
 
-            <label class="label-container">Rating:</label>
+            <label class="label-container">Instrument:</label>
 
-            <p class="value-container">{{rating}}</p>
+            <p class="value-container">
+                {{#each loopCount 5}}
+                    <i class="fa {{ternary (greaterThan ../instrumentRating this) 'fa-star' 'fa-star-o'}}"></i>
+                {{/each}}
+            </p>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="label-container">Decoration:</label>
+
+            <p class="value-container">
+                {{#each loopCount 5}}
+                <i class="fa {{ternary (greaterThan ../decorationRating this) 'fa-heart' 'fa-heart-o'}}"></i>
+                {{/each}}
+            </p>
 
         </div>
 

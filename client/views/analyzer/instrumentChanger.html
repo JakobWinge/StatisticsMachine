@@ -16,12 +16,21 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputRating" class="col-sm-3 control-label">Rating</label>
+                <label for="inputInstrumentRating" class="col-sm-3 control-label">Instrument Rating</label>
 
                 <div class="col-sm-9">
-                    <input id="inputRating" class="rating-slider" data-slider-id='inputRatingSlider' type="text"
+                    <input id="inputInstrumentRating" class="rating-slider" data-rating-property="instrumentRating" data-slider-id='inputInstrumentRatingSlider' type="text"
                            data-slider-min="0" data-slider-max="5" data-slider-step="1"
-                           data-slider-value="{{rating}}"/>
+                           data-slider-value="{{instrumentRating}}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDecorationRating" class="col-sm-3 control-label">Decoration Rating</label>
+
+                <div class="col-sm-9">
+                    <input id="inputDecorationRating" class="rating-slider" data-rating-property="decorationRating" data-slider-id='inputDecorationRatingSlider' type="text"
+                           data-slider-min="0" data-slider-max="5" data-slider-step="1"
+                           data-slider-value="{{decorationRating}}"/>
                 </div>
             </div>
             <div class="row">

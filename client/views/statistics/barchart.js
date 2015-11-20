@@ -53,7 +53,7 @@ var chartTypes = {
         }
     },
     ratingsPerClass: {
-        title: "Ratings per class",
+        title: "Instrument ratings per class",
         xAxisLabel: "Class",
         getChartData: function(instruments) {
 
@@ -70,7 +70,7 @@ var chartTypes = {
             _.each(instruments, function(instrument) {
 
                 if (classes.indexOf(instrument.class) !== -1) {
-                    var ratingValue = _.isNumber(instrument.rating) ? instrument.rating : "Not_set";
+                    var ratingValue = _.isNumber(instrument.instrumentRating) ? instrument.instrumentRating : "Not_set";
                     data[ratingValue][classes.indexOf(instrument.class)]++;
                 }
             });
@@ -84,7 +84,7 @@ var chartTypes = {
         }
     },
     classPerRating: {
-        title: "Instruments per rating",
+        title: "Instruments per instrument rating",
         xAxisLabel: "Rating",
         getChartData: function(instruments) {
 
@@ -101,7 +101,7 @@ var chartTypes = {
             _.each(instruments, function(instrument) {
 
                 if (classes.indexOf(instrument.class) !== -1) {
-                    var ratingValue = _.isNumber(instrument.rating) ? instrument.rating : "Not_set";
+                    var ratingValue = _.isNumber(instrument.instrumentRating) ? instrument.instrumentRating : "Not_set";
                     data[instrument.class][categories.indexOf(ratingValue)]++;
                 }
             });

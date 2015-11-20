@@ -9,7 +9,8 @@ Template.filter.onRendered(function() {
       // Set filter object
 
        var schoolClass = Session.get("filterInputClass");
-       var rating = Session.get("filterInputRating");
+       var instrumentRating = Session.get("filterInputInstrumentRating");
+       var decorationRating = Session.get("filterInputDecorationRating");
        var Button = Session.get("sensorButton");
        var Color = Session.get("sensorColor");
        var IR = Session.get("sensorIR");
@@ -28,8 +29,11 @@ Template.filter.onRendered(function() {
        if (schoolClass !== "" && typeof schoolClass !== "undefined") {
            conditions.push({"class": schoolClass});
        }
-       if (rating !== "" && rating !== undefined) {
-           conditions.push({'rating': parseInt(rating)});
+       if (instrumentRating !== "" && instrumentRating !== undefined) {
+           conditions.push({'instrumentRating': parseInt(instrumentRating)});
+       }
+       if (decorationRating !== "" && decorationRating !== undefined) {
+           conditions.push({'decorationRating': parseInt(decorationRating)});
        }
        if (p1) {
            conditions.push({'sensors.port1': {$nin: [null, ""]}});
@@ -99,8 +103,13 @@ Template.filter.helpers({
             return "selected";
         }
     },
-    filterRatingChecked: function() {
-        if ((!Session.get('filterInputRating')) && !_.isNumber(this) || this == Session.get('filterInputRating')) {
+    filterInstrumentRatingChecked: function() {
+        if ((!Session.get('filterInputInstrumentRating')) && !_.isNumber(this) || this == Session.get('filterInputInstrumentRating')) {
+            return "selected";
+        }
+    },
+    filterDecorationRatingChecked: function() {
+        if ((!Session.get('filterInputDecorationRating')) && !_.isNumber(this) || this == Session.get('filterInputDecorationRating')) {
             return "selected";
         }
     },
@@ -135,8 +144,11 @@ Template.filter.events(
         "change #filterInputClass": function (event) {
             Session.set("filterInputClass", event.target.value);
         },
-        "change #filterInputRating": function (event) {
-            Session.set("filterInputRating", event.target.value);
+        "change #filterInputInstrumentRating": function (event) {
+            Session.set("filterInputInstrumentRating", event.target.value);
+        },
+        "change #filterInputDecorationRating": function (event) {
+            Session.set("filterInputDecorationRating", event.target.value);
         },
         "change #sensorButton": function (event) {
             Session.set("sensorButton", event.target.checked);

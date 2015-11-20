@@ -1,6 +1,10 @@
 Template.registerHelper('equals', function (a, b) {
     return a === b;
 });
+Template.registerHelper('greaterThan', function (a, b) {
+    console.log("Greater than", a, b);
+    return a > b;
+});
 Template.registerHelper('ternary', function (condition, ifTrue, ifFalse) {
     return condition ? ifTrue : ifFalse;
 });
@@ -17,7 +21,7 @@ Template.registerHelper('times', function(n, block) {
     return accum;
 });
 Template.registerHelper('loopCount', function(count, start) {
-    if (!start) start = 0;
+    if (!start || !_.isNumber(start)) start = 0;
     var countArr = [];
     for (var i=start; i<count + start; i++){
         countArr.push(i);

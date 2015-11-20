@@ -59,24 +59,36 @@ Template.instrumentChanger.events({
 
 Template.instrumentChanger.onRendered(function() {
     var self = this;
-    $(this.find('.rating-slider')).slider().on('slideStop', function(ev) {
+
+    $(this.find('#inputInstrumentRating')).slider().on('slideStop', function(ev) {
         Images.update(self.data._id, {
-            $set: {rating: ev.value}
+            $set: {instrumentRating: ev.value}
+        });
+    });
+    $(this.find('#inputDecorationRating')).slider().on('slideStop', function(ev) {
+        Images.update(self.data._id, {
+            $set: {decorationRating: ev.value}
         });
     });
 
     Images.find({_id :  this.data._id}).observeChanges({
         changed: function(ev, obj) {
-            if(obj.hasOwnProperty('rating')) {
-                $(self.find('.rating-slider')).slider('setValue', obj.rating);
-                console.log(obj.rating);
+            if(obj.hasOwnProperty('instrumentRating')) {
+                $(self.find('#inputInstrumentRating')).slider('setValue', obj.instrumentRating);
+            }
+            if(obj.hasOwnProperty('decorationRating')) {
+                $(self.find('#inputDecorationRating')).slider('setValue', obj.decorationRating);
             }
         }
     });
 
-    if (this.data.rating === null) {
-        console.log("updating rating", this);
-        Images.update(this.data._id, {$set: {rating : 0}})
+    if (this.data.instrumentRating === null) {
+        console.log("updating instrument rating", this);
+        Images.update(this.data._id, {$set: {instrumentRating : 0}})
+    }
+    if (this.data.decorationRating === null) {
+        console.log("updating decoration rating", this);
+        Images.update(this.data._id, {$set: {decorationRating : 0}})
     }
 
 });
