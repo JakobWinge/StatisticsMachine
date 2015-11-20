@@ -1,29 +1,5 @@
 RouterAutoscroll.animationDuration = 1;
 
-Router.map(function() {
-    this.route('methodExample', {
-        path: '/add_image',
-        where: 'server',
-        action: function() {
-            // GET, POST, PUT, DELETE
-            var requestMethod = this.request.method;
-            // Data from a POST request
-            var imageData = this.request.body;
-
-            imageData.sensors = {port1: null, port2 : null, port3 : null, port4: null};
-            imageData.rating = null;
-            imageData.soundselector = null;
-            imageData.misconnections = null;
-            imageData.comment = null;
-
-            Images.insert(imageData);
-            // Could be, e.g. application/xml, etc.
-            this.response.writeHead(200, {'Content-Type': 'application/json'});
-            this.response.end('{"success":true}');
-        }
-    });
-});
-
 Router.route('/', {
     name: 'instrument-images',
     template: 'instrument-images',
@@ -48,9 +24,8 @@ Router.route('/picture-images', {
 Router.route('/analyzer', {
     name:"analyzer-random",
     action: function() {
-        var array = Images.find({'state' : {$nin:["instrument", "picture"]}}).fetch();
-        var randomIndex = Math.floor( Math.random() * array.length );
-        Router.go('/analyzer/'+array[randomIndex]._id);
+        var record = Images.findOne({'state' : {$nin:["instrument", "picture", "skipState"]}});
+        Router.go('/analyzer/'+record._id);
     }
 });
 

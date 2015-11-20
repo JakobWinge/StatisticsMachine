@@ -1,6 +1,5 @@
 .analyzer-image {
     display:block;
-    height:500px;
     width:100%;
     background-position: center center;
     background-repeat: no-repeat;
@@ -47,6 +46,13 @@
 .nextButton {
     position: absolute;
     right: -200px;
+    top: 250px;
+
+}
+
+.backButton {
+    position: absolute;
+    left: -200px;
     top: 250px;
 
 }
