@@ -1,19 +1,28 @@
 <template name="analyzer">
     <div class="analyzer-container col-sm-12 jumbotron">
-        <div class="nextButton"><h1><a href="{{pathFor route='analyzer-random'}}"><i
-                class="fa fa-arrow-circle-right"></i></a></h1></div>
+        {{#if isStateChosen}}
+            <div class="nextButton"><h1><a href="{{pathFor route='analyzer-random'}}"><i
+                    class="fa fa-arrow-circle-right"></i></a></h1></div>
+        {{/if}}
+        {{#if isLastRecordAvailable}}
+            <div class="backButton"><h1><a href="#"><i class="fa fa-arrow-circle-left"></i></a></h1></div>
+        {{/if}}
+
         <div class="center-block">
             <img src="{{resizedImagePath path}}" class="analyzer-image" alt=""/>
+            <br/>Class: {{class}} - Tags: {{myTags}} <div class="pull-right">{{analyzedImages}} out of {{totalImages}} analyzed.</div>
         </div>
 
     </div>
 
     <div class="col-sm-12 jumbotron">
-        <div class="col-sm-offset-4 col-sm-4">
+        <div class="col-sm-offset-3 col-sm-6">
             <ul class="nav nav-pills nav-justified">
                 <li role="presentation" id="instrumentState" class="{{getState "instrument"}}"><a
                         href="#">Instrument</a></li>
                 <li role="presentation" id="pictureState" class="{{getState "picture"}}"><a href="#">Picture / Video</a>
+                </li>
+                <li role="presentation" id="skipState" class="{{getState "skipState"}}"><a href="#">Not Interesting</a>
                 </li>
             </ul>
         </div>

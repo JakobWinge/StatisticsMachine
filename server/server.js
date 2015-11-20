@@ -4,7 +4,7 @@ if (Meteor.isServer) {
     Meteor.startup(function () {
         SchoolClasses.remove({});
         if (SchoolClasses.find().count() === 0) {
-            var optionsValue = ["k1", "k2", "k3", "p1a", "p1b","p2", "p3", "p4", "p567"];
+            var optionsValue = ["K1", "K2", "K3", "P1A", "P1B","P2", "P3", "P4", "P5", "M678"];
 
             optionsValue.forEach( function(entry) {
                 SchoolClasses.insert({
