@@ -62,7 +62,7 @@ var chartTypes = {
             var data = {
                 Not_set: getBaseArray(seriesSize)
             };
-            _.each(_.range(1, 6), function(ratingValue) {
+            _.each(_.range(0, 6), function(ratingValue) {
                 data[ratingValue] = getBaseArray(seriesSize);
             });
 
@@ -111,7 +111,7 @@ var chartTypes = {
             }));
         },
         getCategories: function() {
-            var categories = _.range(1, 6);
+            var categories = _.range(0, 6);
             categories.push("Not_set");
             return categories;
         }

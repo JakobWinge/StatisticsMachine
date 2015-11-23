@@ -18,7 +18,7 @@
                         <label for="filterInputInstrumentRating" class="control-label">Instrument</label>
                         <select id="filterInputInstrumentRating" name="filterInputInstrumentRating" class="form-control">
                             <option value="" {{filterIntrumentRatingChecked}}>ALL</option>
-                            {{#each loopCount 5 1}}
+                            {{#each loopCount 6}}
                             <option value="{{this}}" {{filterInstrumentRatingChecked}}>{{this}}</option>
                             {{/each}}
                         </select>
@@ -28,7 +28,7 @@
                         <label for="filterInputDecorationRating" class="control-label">Decoration</label>
                         <select id="filterInputDecorationRating" name="filterInputDecorationRating" class="form-control">
                             <option value="" {{filterDecorationRatingChecked}}>ALL</option>
-                            {{#each loopCount 5 1}}
+                            {{#each loopCount 6}}
                             <option value="{{this}}" {{filterDecorationRatingChecked}}>{{this}}</option>
                             {{/each}}
                         </select>
