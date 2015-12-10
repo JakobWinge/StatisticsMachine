@@ -2,7 +2,6 @@ Template.registerHelper('equals', function (a, b) {
     return a === b;
 });
 Template.registerHelper('greaterThan', function (a, b) {
-    console.log("Greater than", a, b);
     return a > b;
 });
 Template.registerHelper('ternary', function (condition, ifTrue, ifFalse) {
