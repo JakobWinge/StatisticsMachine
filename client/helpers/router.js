@@ -4,7 +4,7 @@ Router.route('/', {
     name: 'instrument-images',
     template: 'instrument-images',
     onBeforeAction: function () {
-        Session.set("itemsLimit", Meteor.settings.public.infiniteLength);
+        Session.set("itemsLimit", Meteor.settings.public.infiniteLength || 5);
         this.next();
     }
 });
@@ -16,7 +16,7 @@ Router.route('/picture-images', {
     name: 'picture-images',
     template: 'picture-images',
     onBeforeAction: function () {
-        Session.set("itemsLimit", Meteor.settings.public.infiniteLength);
+        Session.set("itemsLimit", Meteor.settings.public.infiniteLength || 5);
         this.next();
     }
 });

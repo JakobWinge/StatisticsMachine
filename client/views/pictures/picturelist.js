@@ -1,6 +1,5 @@
-var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 10;
+var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 5;
 
-Session.set('itemsLimit', ITEMS_INCREMENT);
 
 function resetInfiniteScroll() {
     Session.set('itemsLimit', ITEMS_INCREMENT);
@@ -58,6 +57,6 @@ Template.picturelist.helpers({
         Session.set("findObjectPictures", findObject);
 
 
-        return Images.find(findObject, {limit: Session.get('itemsLimit')});
+        return Images.find(findObject, {limit: Session.get('itemsLimit'), sort: {class: 1, baseName: 1}});
     }
 });

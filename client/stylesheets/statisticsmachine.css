@@ -135,6 +135,8 @@ body {
     color: #000;
     padding: 0;
     box-shadow: -1px 0px 20px rgba(0, 0, 0, 0.3);
+
+    overflow-y:auto;
 }
 
 .instrument-details .header {
@@ -306,4 +308,38 @@ h3 .photo-time {
 .panel-heading select {
     width:80%;
     width:calc(100% - 50px);
+}
+
+.instrument-details h3 {
+    font-size: 1em;
+    margin: 1em 0 0 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+.comments {
+    list-style: none;
+    padding: 0;
+    margin: 0.5em 0 3em 0;
+}
+.comments .comment {
+    border-bottom: 1px solid #FFF;
+    background:#f5f5f5;
+    color:#777;
+    padding:0.5em;
+}
+.comments .comment .author {
+    color: #336699;
+    font-weight: bold;
+}
+.comments .comment .datetime {
+    display:block;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.7em;
+    color:#999;
+    text-align: right;
+}
+.comments .comment textarea {
+    width:100%;
+    border:none;
 }

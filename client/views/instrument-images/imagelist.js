@@ -1,4 +1,4 @@
-var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength;
+var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 5;
 
 Template.imagelist.helpers({
     moreResults: function () {

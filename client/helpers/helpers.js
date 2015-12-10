@@ -13,6 +13,12 @@ Template.registerHelper('toLowerCase', function(str) {
 Template.registerHelper('toUpperCase', function(str) {
     return str.toUpperCase();
 });
+Template.registerHelper('formatDate', function(date) {
+    return moment(date).format('MM-DD-YYYY');
+});
+Template.registerHelper('formatDateTime', function(date) {
+    return moment(date).format('HH:mm MM-DD-YYYY');
+});
 Template.registerHelper('times', function(n, block) {
     var accum = '';
     for(var i = 0; i < n; ++i)
