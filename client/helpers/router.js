@@ -24,7 +24,7 @@ Router.route('/picture-images', {
 Router.route('/analyzer', {
     name:"analyzer-random",
     action: function() {
-        var record = Images.findOne({'state' : {$nin:["instrument", "picture", "skipState"]}});
+        var record = Images.findOne({'state' : {$nin:["instrument", "picture", "skipState"]}, video:true});
         Router.go('/analyzer/'+record._id);
     }
 });

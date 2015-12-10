@@ -37,3 +37,7 @@ Template.registerHelper('originalImagePath', function (image) {
 Template.registerHelper('resizedImagePath', function (image) {
     return imageServer + "resized/" + image;
 });
+
+Template.registerHelper('videoPath', function (image) {
+    return imageServer + "videos/" + image;
+});

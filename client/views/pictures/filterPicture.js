@@ -19,6 +19,12 @@ Template.filterPicture.helpers({
         if ((!this.value && !Session.get('filterInputClass')) || this.value === Session.get('filterInputClass')) {
             return "selected";
         }
+    },
+
+    filterVideoOnlyChecked: function () {
+        if (Session.get('filterVideoOnly')) {
+            return "checked";
+        }
     }
 
 });
@@ -30,6 +36,9 @@ Template.filterPicture.events(
         },
         "change #filterComment": function (event) {
             Session.set("pictureFilterComment", event.target.value);
+        },
+        "change #filterVideoOnly": function (event) {
+            Session.set("filterVideoOnly", event.target.checked);
         }
     }
 );

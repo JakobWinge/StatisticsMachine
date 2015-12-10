@@ -8,9 +8,22 @@
             <div class="backButton"><h1><a href="#"><i class="fa fa-arrow-circle-left"></i></a></h1></div>
         {{/if}}
 
-        <div class="center-block">
-            <img src="{{resizedImagePath path}}" class="analyzer-image" alt=""/>
-            <br/>Class: {{class}} - Tags: {{myTags}} <div class="pull-right">{{analyzedImages}} out of {{totalImages}} analyzed.</div>
+        <div class="center-block clearfix">
+
+            {{#if video}}
+                <video loop controls id="bgvid" class="analyzer-image">
+                    <source src="{{videoPath path}}" type="video/mp4">
+                </video>
+            {{else}}
+                <img src="{{resizedImagePath path}}" class="analyzer-image" alt=""/>
+            {{/if}}
+
+            <div class="pull-right">{{analyzedImages}} out of {{totalImages}} analyzed.</div>
+
+            <p>{{baseName}}</p>
+            Class: {{class}} - Tags: {{myTags}}
+
+
         </div>
 
     </div>

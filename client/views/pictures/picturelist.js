@@ -1,4 +1,6 @@
-var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength;
+var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 10;
+
+Session.set('itemsLimit', ITEMS_INCREMENT);
 
 function resetInfiniteScroll() {
     Session.set('itemsLimit', ITEMS_INCREMENT);
@@ -20,6 +22,7 @@ Template.picturelist.helpers({
         var schoolClass = Session.get("filterInputClass");
         var comment = Session.get("pictureFilterComment");
         var tags = Session.get("pictureFilterTags");
+        var videoOnly = Session.get("filterVideoOnly");
 
         var findObject = {};
         var conditions = [];
@@ -38,6 +41,10 @@ Template.picturelist.helpers({
                 $regex: '.*' + comment + '.*',
                 $options: "i"
             }});
+        }
+
+        if (videoOnly) {
+            conditions.push({video: true});
         }
 
         if (conditions.length > 0) {

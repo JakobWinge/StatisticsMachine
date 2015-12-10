@@ -1,6 +1,6 @@
 {
   "public": {
-    "imagesUrl": "http://10.192.112.71:8080/",
+    "imagesUrl": "http://localhost:8080/",
     "infiniteLength": 5
   }
 }
