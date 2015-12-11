@@ -26,7 +26,7 @@ function pictureFilterChanged() {
     }
 
     if (comment) {
-        conditions.push({comment: {
+        conditions.push({"comments.comment": {
             $regex: '.*' + comment + '.*',
             $options: "i"
         }});
