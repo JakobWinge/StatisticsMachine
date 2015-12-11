@@ -1,3 +1,8 @@
+var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 5;
+function resetInfiniteScroll() {
+    Session.set('itemsLimit', ITEMS_INCREMENT);
+}
+
 var getSensorConditions = function (sensorName) {
     return {
         $or: [{"sensors.port1": sensorName}, {"sensors.port2": sensorName}, {"sensors.port3": sensorName}, {"sensors.port4": sensorName}]
@@ -80,6 +85,10 @@ Template.filter.onRendered(function() {
 
        if (Gyro === true) {
            conditions.push(getSensorConditions("Gyro"));
+       }
+
+       if (conditions.length > 0) {
+           resetInfiniteScroll();
        }
 
        conditions.push({state: "instrument"});

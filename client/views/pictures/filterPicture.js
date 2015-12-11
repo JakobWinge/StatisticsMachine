@@ -1,5 +1,53 @@
 var tags = []; // TODO
 
+var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 5;
+
+
+function resetInfiniteScroll() {
+    Session.set('itemsLimit', ITEMS_INCREMENT);
+}
+
+function pictureFilterChanged() {
+    var schoolClass = Session.get("filterInputClass");
+    var comment = Session.get("pictureFilterComment");
+    var tags = Session.get("pictureFilterTags");
+    var videoOnly = Session.get("filterVideoOnly");
+
+    var findObject = {};
+    var conditions = [];
+
+    if (schoolClass !== "" && schoolClass !== undefined) {
+        //findObject.class = schoolClass;
+        conditions.push({"class": schoolClass});
+    }
+
+    if (tags && tags.length > 0) {
+        conditions.push({"tags": {$all: tags}});
+    }
+
+    if (comment) {
+        conditions.push({comment: {
+            $regex: '.*' + comment + '.*',
+            $options: "i"
+        }});
+    }
+
+    if (videoOnly) {
+        conditions.push({video: true});
+    }
+
+    if (conditions.length > 0) {
+     resetInfiniteScroll();
+    }
+
+    conditions.push({state: "picture"});
+
+    findObject = {$and: conditions};
+
+    Session.set("pictureFilterObject", findObject);
+}
+
+
 Template.filterPicture.helpers({
     schoolClasses: function () {
         return SchoolClasses.find({});
@@ -44,10 +92,12 @@ Template.filterPicture.events(
 );
 
 Template.filterPicture.onRendered(function() {
+
+    Tracker.autorun(pictureFilterChanged.bind(this));
+
     var self = this,
         elem = $(this.find('.tags-input'));
 
-//console.log("On tag input rendered", elem);
 
     elem.tokenfield({
         typeahead: [null, {
@@ -78,17 +128,6 @@ Template.filterPicture.onRendered(function() {
         Session.set("pictureFilterTags", tags);
     };
 
-    /*var saveTags = function(tagObjects) {
-        var tags = tagObjects.map(function(tag) {
-            return tag.value;
-        });
-        console.log("Save tags to item", tags, self.data._id);
-        Images.update(self.data._id, {
-            $set: {tags: tags}
-        });
-        self.data.tags = tags;
-    }*/
-
     // Avoid duplicates and none existant (TODO)
     elem.on('tokenfield:createtoken', function (event) {
         // No duplicates
@@ -96,17 +135,6 @@ Template.filterPicture.onRendered(function() {
             event.preventDefault();
             return;
         }
-
-        // No none-existing tags
-        /*var available_tags = ImageTags.find().fetch();
-        var exists = false;
-        $.each(available_tags, function(index, tag) {
-            if (tag.value === event.attrs.value)
-                exists = true;
-        });
-        if(!exists) {
-            event.preventDefault();
-        }*/
     });
 
     elem.on('tokenfield:createdtoken', function (event) {

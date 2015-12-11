@@ -11,10 +11,10 @@ Template.imagelist.helpers({
 
         var filterObject = Session.get("filterObject") || {state:"instrument"};
 
-        if (filterObject.$and && filterObject.$and.length > 1) {
+        /*if (filterObject.$and && filterObject.$and.length > 1) {
             resetInfiniteScroll();
         }
-
+*/
 
         return Images.find(filterObject, {limit: Session.get('itemsLimit')});
     }
@@ -47,6 +47,3 @@ function showMoreVisible() {
 // run the above func every time the user scrolls
 $(window).scroll(showMoreVisible);
 
-function resetInfiniteScroll() {
-    Session.set('itemsLimit', ITEMS_INCREMENT);
-}

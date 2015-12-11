@@ -1,15 +1,8 @@
-var ITEMS_INCREMENT = Meteor.settings.public.infiniteLength || 5;
-
-
-function resetInfiniteScroll() {
-    Session.set('itemsLimit', ITEMS_INCREMENT);
-}
-
 Template.picturelist.helpers({
     moreResults: function () {
         // If, once the subscription is ready, we have less rows than we
         // asked for, we've got all the rows in the collection.
-        return !(Images.find(Session.get("findObjectPictures")).count() < Session.get("itemsLimit"));
+        return !(Images.find(Session.get("pictureFilterObject")).count() < Session.get("itemsLimit"));
     },
 
     /*pictures: function () {
@@ -18,7 +11,7 @@ Template.picturelist.helpers({
     },*/
 
     pictures: function () {
-        var schoolClass = Session.get("filterInputClass");
+        /*var schoolClass = Session.get("filterInputClass");
         var comment = Session.get("pictureFilterComment");
         var tags = Session.get("pictureFilterTags");
         var videoOnly = Session.get("filterVideoOnly");
@@ -46,17 +39,20 @@ Template.picturelist.helpers({
             conditions.push({video: true});
         }
 
-        if (conditions.length > 0) {
+        *//*if (conditions.length > 0) {
             resetInfiniteScroll();
-        }
+        }*//*
 
         conditions.push({state: "picture"});
 
         findObject = {$and: conditions};
 
-        Session.set("findObjectPictures", findObject);
+        Session.set("findObjectPictures", findObject);*/
+
+        var filterObject = Session.get("pictureFilterObject") || {state:"picture"};
+        console.log("Get pictures", filterObject);
 
 
-        return Images.find(findObject, {limit: Session.get('itemsLimit'), sort: {class: 1, baseName: 1}});
+        return Images.find(filterObject, {limit: Session.get('itemsLimit'), sort: {class: 1, baseName: 1}});
     }
 });
