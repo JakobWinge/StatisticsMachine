@@ -13,7 +13,13 @@
 
     {{#each instrumentRefs}}
         <div class="picture-container col-sm-6">
-            <img src="{{resizedImagePath path}}" alt=""/>
+            {{#if video}}
+                <video loop controls>
+                    <source src="{{videoPath path}}" type="video/mp4">
+                </video>
+            {{else}}
+                <img src="{{resizedImagePath path}}" alt=""/>
+            {{/if}}
 
             <div class="instrumentRefOptions">
                 <ul>
