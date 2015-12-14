@@ -15,9 +15,10 @@
     position: relative;
 }
 
-.picture-container img{
+.picture-container img, .picture-container video{
     width: 100%;
 }
+
 
 .instrumentRefOptions {
     position: absolute;

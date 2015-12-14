@@ -3,14 +3,71 @@ function resetInfiniteScroll() {
     Session.set('itemsLimit', ITEMS_INCREMENT);
 }
 
+var tags = [];
+
 var getSensorConditions = function (sensorName) {
     return {
         $or: [{"sensors.port1": sensorName}, {"sensors.port2": sensorName}, {"sensors.port3": sensorName}, {"sensors.port4": sensorName}]
     };
 };
 
+var runTagsFilter = function() {
+
+    var elem = $(this.find('.tags-input'));
+
+
+    elem.tokenfield({
+        typeahead: [null, {
+            name: 'tags',
+            displayKey: 'value',
+            source: function(query, syncResults) {
+
+                var suggestedTags = ImageTags.find({value: {
+                    $regex: "^"+query,
+                    $options: "i",
+                    $nin: Session.get("instrumentFilterTags") || []
+                }}).fetch();
+                syncResults(suggestedTags);
+            }
+        }],
+        minWidth:23
+    });
+
+    var setFilterTags = function() {
+        var tagObjects = elem.tokenfield('getTokens');
+        var tags = tagObjects.map(function(tag) {
+            return tag.value;
+        });
+        console.log("Filter tags", tags);
+        Session.set("instrumentFilterTags", tags);
+    };
+
+    // Avoid duplicates and none existant (TODO)
+    elem.on('tokenfield:createtoken', function (event) {
+        // No duplicates
+        var existingTags = Session.get("instrumentFilterTags");
+        if (existingTags && existingTags.indexOf(event.attrs.value) > -1) {
+            event.preventDefault();
+            return;
+        }
+    });
+
+    elem.on('tokenfield:createdtoken', function (event) {
+        setFilterTags();
+    });
+
+    elem.on('tokenfield:removedtoken', function (event) {
+        setFilterTags();
+    });
+
+};
+
+
 Template.filter.onRendered(function() {
-   Tracker.autorun(function() {
+
+    runTagsFilter.call(this);
+
+    Tracker.autorun(function() {
       // Set filter object
 
        var schoolClass = Session.get("filterInputClass");
@@ -28,6 +85,7 @@ Template.filter.onRendered(function() {
        var soundselector = Session.get("soundselector");
        var inputMisconnections = Session.get("inputMisconnections");
        var comment = Session.get("instrumentFilterComment");
+        var tags = Session.get("instrumentFilterTags");
 
        var conditions = [];
 
@@ -65,6 +123,10 @@ Template.filter.onRendered(function() {
                $options: "i"
            }});
        }
+
+        if (tags && tags.length > 0) {
+            conditions.push({"tags": {$all: tags}});
+        }
 
        //sensors
        if (Button === true) {
@@ -144,7 +206,10 @@ Template.filter.helpers({
     filterCommentValue: function() {
         return Session.get("instrumentFilterComment");
     },
-
+    filterTags: function() {
+        var tags = Session.get("instrumentFilterTags");
+        return (tags || []).join(",");
+    }
 
 });
 
