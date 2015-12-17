@@ -1,0 +1,14 @@
+<template name="comments">
+    <ul class="comments">
+        {{#each myComments}}
+        <li class="comment">
+            <span class="author">{{user}}</span>
+            {{comment}}
+            <span class="datetime">{{formatDateTime date}}</span>
+        </li>
+        {{/each}}
+        <li class="comment">
+            <textarea name="comment" id="newComment" cols="30" rows="2" placeholder="Write a comment..."></textarea>
+        </li>
+    </ul>
+</template>

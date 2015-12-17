@@ -1,9 +1,8 @@
 /**
- * Created by jeppestougaard on 10/12/15.
+ * Created by jeppestougaard on 17/12/15.
  */
 
-/*
-Template.pictureViewer.events = {
+Template.comments.events = {
     'keydown #newComment': function(event) {
         //console.log("New comment", event, Template.instance());
         if (event.keyCode == 13 && !event.shiftKey) {
@@ -33,9 +32,8 @@ Template.pictureViewer.events = {
     }
 };
 
-
-Template.pictureViewer.helpers({
+Template.comments.helpers({
     myComments: function() {
         return this.comments || [];
     }
-})*/
+});
