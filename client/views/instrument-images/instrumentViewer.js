@@ -3,6 +3,6 @@ Template.instrumentViewer.helpers({
         return Images.find({'refs' : this._id, 'state' : "picture"});
     },
     relatedPicturesCount: function() {
-        return Images.count({'refs' : this._id, 'state' : "picture"});
+        return Images.find({'refs' : this._id, 'state' : "picture"}).count();
     }
 });

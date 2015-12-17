@@ -3,9 +3,9 @@
     <div class="header clearfix">
         <h4>{{baseName}}</h4>
         <div class="action-buttons">
-            <a class="btn btn-default html5lightbox" href="{{originalImagePath path}}"  data-group="{{_id}}" title="{{baseName}}"><i class="fa fa-expand"></i></a>
+            <a class="btn btn-default" href="{{originalImagePath path}}"  data-lightbox="{{_id}}"><i class="fa fa-expand"></i></a>
             {{#each relatedPictures}}
-                <a class="hidden html5lightbox" href="{{originalImagePath path}}"  data-group="{{../_id}}" title="{{baseName}}"></a>
+                <a class="hidden" href="{{originalImagePath path}}"  data-lightbox="{{../_id}}"></a>
             {{/each}}
             <a class="btn btn-info" href="{{pathFor route='analyzer' _id= _id}}"><i class="fa fa-pencil"></i></a>
         </div>
