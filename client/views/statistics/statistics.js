@@ -23,6 +23,14 @@ Template.statistics.events = {
         });
     },
 
+    "click #addGaugeChart": function (event, template) {
+        console.log("New gauge chart")
+
+        Charts.insert({
+            type: "gaugechart"
+        });
+    },
+
 
     "click .btn-close-panel": function(event, template) {
         var id = $(event.currentTarget).data("chartid");

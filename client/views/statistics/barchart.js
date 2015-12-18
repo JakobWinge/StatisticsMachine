@@ -211,7 +211,7 @@ var chartTypes = {
 
 
 
-            return {
+            return [{
                 name: "Number of sensors",
                 data: _.map(numberOfSensors, function(value, index) {
                     return {
@@ -219,7 +219,7 @@ var chartTypes = {
                         y: value
                     }
                 })
-            }
+            }];
         },
         getCategories: function() {
             return null;
