@@ -38,10 +38,12 @@ var chartTypes = {
 
             _.each(instruments, function(instrument) {
                 var portSensors = _.values(instrument.sensors);
-                for (var i=0;i<portSensors.length;i++ && portSensors[i]) {
-                    var type = portSensors[i]; // ? portSensors[i] : "Empty";
-                    if (!data[type]) data[type] = [0,0,0,0];
-                    data[type][i]++;
+                for (var i=0;i<portSensors.length;i++) {
+                    if (portSensors[i]) {
+                        var type = portSensors[i]; // ? portSensors[i] : "Empty";
+                        if (!data[type]) data[type] = [0, 0, 0, 0];
+                        data[type][i]++;
+                    }
                 }
             });
 
