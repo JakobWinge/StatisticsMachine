@@ -15,7 +15,7 @@ var chartTypes = {
             return instruments.length;
         },
         getMaxValue: function(instruments) {
-            return 100; // TODO
+            return Images.find({state:"instrument"}).count();
         }
     },
     avgInstrumentRating: {
@@ -58,7 +58,7 @@ var chartTypes = {
             return _.size(_.groupBy(instruments, function(item) {return item.class}));
         },
         getMaxValue: function(instruments) {
-            return 10; // TODO
+            return 8; // TODO
         }
     },
     usingPort1: {
@@ -228,7 +228,10 @@ Template.gaugechart.onCreated(function() {
             series: [{
                 name: chartHandler.title,
                 dataLabels: {
-                    format: '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">'+(chartHandler.isDecimal ? '{y:.1f}' : '{y}')+'</span>'
+                    formatter: function() {
+                        return '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">'+(chartHandler.isDecimal ? this.y.toFixed(1) : this.y)+'</span>' +
+                                '<br/><span style="font-size:12px;color:silver">'+(this.y/chartHandler.getMaxValue(instruments)*100).toFixed(1)+'%</span></div>';
+                    }
                 },
                 data: [chartHandler.getChartValue(instruments)]
 
