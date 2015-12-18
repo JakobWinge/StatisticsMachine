@@ -193,6 +193,37 @@ var chartTypes = {
         getCategories: function() {
             return getClassNames();
         }
+    },
+    avgRatingPerNumberOfSensors: {
+        title: "Average rating over number of sensors",
+        xAxisLabel: "Sensor counts",
+        getChartData: function(instruments) {
+
+            var numberOfSensors = getBaseArray(5);
+
+            _.each(instruments, function(item) {
+                var count = _.reduce(item.sensors, function(memo, sensorName) {
+                    return memo + (sensorName ? 1 : 0);
+                }, 0);
+
+                numberOfSensors[count]++;
+            })
+
+
+
+            return {
+                name: "Number of sensors",
+                data: _.map(numberOfSensors, function(value, index) {
+                    return {
+                        name: index + " sensor" + (index !== 1 ? "s" : ""),
+                        y: value
+                    }
+                })
+            }
+        },
+        getCategories: function() {
+            return null;
+        }
     }
 };
 
@@ -247,7 +278,7 @@ Template.barchart.onCreated(function() {
             tooltip: {
                 headerFormat: '<span style="font-size:1.2em;border-bottom: 1px solid black;">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
