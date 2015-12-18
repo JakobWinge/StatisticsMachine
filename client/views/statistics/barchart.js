@@ -151,6 +151,48 @@ var chartTypes = {
             categories.push("Not_set");
             return categories;
         }
+    },
+    avgRatingPerClass: {
+        title: "Average rating per class",
+        xAxisLabel: "Class",
+        getChartData: function(instruments) {
+
+            var classes = getClassNames();
+            var seriesSize = classes.length;
+            var instrumentRatings = getBaseArray(seriesSize);
+            var decorationRatings =  getBaseArray(seriesSize);
+
+
+            var instrumentCounts = getBaseArray(seriesSize);
+
+            _.each(instruments, function(instrument) {
+
+                if (classes.indexOf(instrument.class) !== -1) {
+                    var classIndex = classes.indexOf(instrument.class);
+                    instrumentRatings[classIndex] += _.isNumber(instrument.instrumentRating) ? instrument.instrumentRating : 0;
+                    decorationRatings[classIndex] += _.isNumber(instrument.decorationRating) ? instrument.decorationRating : 0;
+                    instrumentCounts[classIndex]++;
+                }
+            });
+
+            return [
+                {
+                    name: "Instrument rating",
+                    data: _.map(instrumentRatings, function(sum, index) {
+                        return sum > 0 ? sum / instrumentCounts[index] : 0
+                    })
+                },
+                {
+                    name: "Decoration rating",
+                    data: _.map(decorationRatings, function(sum, index) {
+                        return sum > 0 ? sum / instrumentCounts[index] : 0
+                    })
+                }
+            ];
+        },
+        getCategories: function() {
+            return getClassNames();
+        }
     }
 };
 
