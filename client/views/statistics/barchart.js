@@ -209,7 +209,9 @@ var chartTypes = {
 
                 numberOfSensors[count]++;
                 ratingSums[count] += item.instrumentRating;
-            })
+            });
+
+            console.log("avg", numberOfSensors, ratingSums);
 
 
 
@@ -218,7 +220,7 @@ var chartTypes = {
                 data: _.map(ratingSums, function(value, index) {
                     return {
                         name: index + " sensor" + (index !== 1 ? "s" : ""),
-                        y: value / numberOfSensors[count]
+                        y: value > 0 ? value / numberOfSensors[index] : 0
                     }
                 })
             }];

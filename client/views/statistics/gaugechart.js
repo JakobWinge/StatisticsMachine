@@ -3,9 +3,9 @@
  */
 
 var getAvg = function(array, itemValueCallback) {
-    return _.reduce(instruments, function(memo, item) {
+    return _.reduce(array, function(memo, item) {
             return memo + itemValueCallback(item);
-        }, 0) / (instruments.length === 0 ? 1 : instruments.length);
+        }, 0) / (array.length === 0 ? 1 : array.length);
 };
 
 var chartTypes = {
@@ -25,7 +25,8 @@ var chartTypes = {
         },
         getMaxValue: function() {
             return 5;
-        }
+        },
+        isDecimal: true
     },
     avgDecorationRating: {
         title: "Avg decoration rating",
@@ -34,7 +35,8 @@ var chartTypes = {
         },
         getMaxValue: function() {
             return 5;
-        }
+        },
+        isDecimal: true
     },
     avgSensorsUsed: {
         title: "Avg sensors used",
@@ -47,7 +49,8 @@ var chartTypes = {
         },
         getMaxValue: function() {
             return 4;
-        }
+        },
+        isDecimal: true
     },
     classes: {
         title: "Classes represented",
@@ -225,7 +228,7 @@ Template.gaugechart.onCreated(function() {
             series: [{
                 name: chartHandler.title,
                 dataLabels: {
-                    format: '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">{y}</span>'
+                    format: '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">'+(chartHandler.isDecimal ? '{y:.1f}' : '{y}')+'</span>'
                 },
                 data: [chartHandler.getChartValue(instruments)]
 
