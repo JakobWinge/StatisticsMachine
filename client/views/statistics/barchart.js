@@ -24,11 +24,12 @@ var chartTypes = {
     sensors: {
         title: "Instrument sensors",
         xAxisLabel: "Ports",
+        stacking: true,
         getChartData: function(instruments) {
 
             var sensors = Sensors.find().fetch();
             var data = {
-                Empty: [0,0,0,0]
+                //Empty: [0,0,0,0]
             };
             _.each(sensors, function(sensor) {
                 data[sensor.value] = [0,0,0,0];
@@ -37,8 +38,8 @@ var chartTypes = {
 
             _.each(instruments, function(instrument) {
                 var portSensors = _.values(instrument.sensors);
-                for (var i=0;i<portSensors.length;i++) {
-                    var type = portSensors[i] ? portSensors[i] : "Empty";
+                for (var i=0;i<portSensors.length;i++ && portSensors[i]) {
+                    var type = portSensors[i]; // ? portSensors[i] : "Empty";
                     if (!data[type]) data[type] = [0,0,0,0];
                     data[type][i]++;
                 }
@@ -86,6 +87,7 @@ var chartTypes = {
     classPerRating: {
         title: "Instruments per instrument rating",
         xAxisLabel: "Rating",
+        stacking: true,
         getChartData: function(instruments) {
 
             var classes = getClassNames();
@@ -102,6 +104,40 @@ var chartTypes = {
 
                 if (classes.indexOf(instrument.class) !== -1) {
                     var ratingValue = _.isNumber(instrument.instrumentRating) ? instrument.instrumentRating : "Not_set";
+                    data[instrument.class][categories.indexOf(ratingValue)]++;
+                }
+            });
+
+            return _.values(_.map(data, function(data, key) {
+                return {name: key, data: data};
+            }));
+        },
+        getCategories: function() {
+            var categories = _.range(0, 6);
+            categories.push("Not_set");
+            return categories;
+        }
+    },
+    classPerDecorationRating: {
+        title: "Instruments per decoration rating",
+        xAxisLabel: "Rating",
+        stacking: true,
+        getChartData: function(instruments) {
+
+            var classes = getClassNames();
+            var categories = this.getCategories();
+            var seriesSize = categories.length;
+
+            var data = {};
+            _.each(classes, function(className) {
+                data[className] = getBaseArray(seriesSize);
+            });
+
+
+            _.each(instruments, function(instrument) {
+
+                if (classes.indexOf(instrument.class) !== -1) {
+                    var ratingValue = _.isNumber(instrument.decorationRating) ? instrument.decorationRating : "Not_set";
                     data[instrument.class][categories.indexOf(ratingValue)]++;
                 }
             });
@@ -177,7 +213,7 @@ Template.barchart.onCreated(function() {
 
             plotOptions: {
                 column: {
-                    /*stacking: 'normal',*/
+                    stacking: chartHandler.stacking ? 'normal' : null,
                     pointPadding: 0.2,
                     borderWidth: 0
                 }
