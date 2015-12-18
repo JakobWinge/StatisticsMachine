@@ -200,6 +200,7 @@ var chartTypes = {
         getChartData: function(instruments) {
 
             var numberOfSensors = getBaseArray(5);
+            var ratingSums = getBaseArray(5);
 
             _.each(instruments, function(item) {
                 var count = _.reduce(item.sensors, function(memo, sensorName) {
@@ -207,16 +208,17 @@ var chartTypes = {
                 }, 0);
 
                 numberOfSensors[count]++;
+                ratingSums[count] += item.instrumentRating;
             })
 
 
 
             return [{
-                name: "Number of sensors",
-                data: _.map(numberOfSensors, function(value, index) {
+                name: "Avg rating",
+                data: _.map(ratingSums, function(value, index) {
                     return {
                         name: index + " sensor" + (index !== 1 ? "s" : ""),
-                        y: value
+                        y: value / numberOfSensors[count]
                     }
                 })
             }];
