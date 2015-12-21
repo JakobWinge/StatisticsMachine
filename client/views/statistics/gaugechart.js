@@ -150,6 +150,15 @@ var chartTypes = {
         getMaxValue: function(instruments) {
             return instruments.length;
         }
+    },
+    usingSoundWheel: {
+        title: "Using sound wheel",
+        getChartValue: function (instruments) {
+            return _.countBy(instruments, function(item) {return (item.soundselector  ? "YES" : "NO") }).YES || 0;
+        },
+        getMaxValue: function(instruments) {
+            return instruments.length;
+        }
     }
 
 
