@@ -175,12 +175,12 @@ Template.filter.helpers({
         }
     },
     filterInstrumentRatingChecked: function() {
-        if ((!Session.get('filterInputInstrumentRating')) && !_.isNumber(this) || this == Session.get('filterInputInstrumentRating')) {
+        if ((typeof Session.get('filterInputInstrumentRating') === "undefined" || Session.get('filterInputInstrumentRating') === null) && !_.isNumber(this) || this == Session.get('filterInputInstrumentRating')) {
             return "selected";
         }
     },
     filterDecorationRatingChecked: function() {
-        if ((!Session.get('filterInputDecorationRating')) && !_.isNumber(this) || this == Session.get('filterInputDecorationRating')) {
+        if ((typeof Session.get('filterInputDecorationRating') === "undefined" || Session.get('filterInputDecorationRating') === null) && !_.isNumber(this) || this == Session.get('filterInputDecorationRating')) {
             return "selected";
         }
     },

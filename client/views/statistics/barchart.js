@@ -86,6 +86,37 @@ var chartTypes = {
             return getClassNames();
         }
     },
+    decorationRatingsPerClass: {
+        title: "Decoration ratings per class",
+        xAxisLabel: "Class",
+        getChartData: function(instruments) {
+
+            var classes = getClassNames();
+            var seriesSize = classes.length;
+            var data = {
+                Not_set: getBaseArray(seriesSize)
+            };
+            _.each(_.range(0, 6), function(ratingValue) {
+                data[ratingValue] = getBaseArray(seriesSize);
+            });
+
+
+            _.each(instruments, function(instrument) {
+
+                if (classes.indexOf(instrument.class) !== -1) {
+                    var ratingValue = _.isNumber(instrument.decorationRating) ? instrument.decorationRating : "Not_set";
+                    data[ratingValue][classes.indexOf(instrument.class)]++;
+                }
+            });
+
+            return _.values(_.map(data, function(data, key) {
+                return {name: key, data: data};
+            }));
+        },
+        getCategories: function() {
+            return getClassNames();
+        }
+    },
     classPerRating: {
         title: "Instruments per instrument rating",
         xAxisLabel: "Rating",
